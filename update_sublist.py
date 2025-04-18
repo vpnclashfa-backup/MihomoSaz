@@ -116,8 +116,10 @@ def main():
         print("🛠 قالب mihomo_template.txt تغییر کرده؛ بازسازی همه فایل‌ها")
 
     entries = []
-    entries += load_url_list(url_file_simple)
-    entries += load_url_list(url_file_complex, convert_complex=True)
+    
+    # فایل‌های ساده و پیچیده را جداگانه بارگذاری می‌کنیم
+    entries += load_url_list(url_file_simple)  # لیست ساده را بارگذاری می‌کنیم
+    entries += load_url_list(url_file_complex, convert_complex=True)  # لیست پیچیده را بارگذاری می‌کنیم
 
     new_cache_entries = []
     changes_detected = False
