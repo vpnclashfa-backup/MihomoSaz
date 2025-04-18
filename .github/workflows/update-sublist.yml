@@ -2,8 +2,8 @@ name: به‌روزرسانی Sublist
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # زمان‌بندی اجرای خودکار
-  workflow_dispatch:  # امکان اجرای دستی
+    - cron: '0 0 * * *'  # هر روز ساعت ۰۰:۰۰ UTC
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -16,17 +16,15 @@ jobs:
       - name: کلون کردن ریپو
         uses: actions/checkout@v3
 
-      - name: نصب پایتون و PyYAML
+      - name: نصب پایتون و ruamel.yaml
         run: |
-          sudo apt update
-          sudo apt install python3-pip -y
-          pip install pyyaml
+          python3 -m pip install --upgrade pip
+          pip install ruamel.yaml
 
-      - name: اجرای اسکریپت پایتون
-        run: |
-          python3 update_sublist.py
+      - name: اجرای اسکریپت Python
+        run: python3 update_sublist.py
 
-      - name: Commit و Push در صورت وجود تغییر
+      - name: Commit و Push در صورت تغییر
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
