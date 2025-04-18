@@ -1,76 +1,78 @@
 import os
 import urllib.parse
-from ruamel.yaml import YAML
+import re
 
-# فایل‌ها
-simple_list = "Simple_URL_List.txt"
-complex_list = "Complex_URL_List.txt"
-template_file = "mihomo_template.txt"
-output_dir = "Sublist"
-cache_file = ".last_urls.txt"
+def load_url_list(file_path, convert_complex=False):
+    entries = []
+    if not os.path.exists(file_path):
+        return entries
 
-yaml = YAML()
-yaml.preserve_quotes = True
-yaml.indent(mapping=2, sequence=4, offset=2)
-
-os.makedirs(output_dir, exist_ok=True)
-
-# کش قبلی
-previous = {}
-if os.path.exists(cache_file):
-    with open(cache_file, "r", encoding="utf-8") as f:
+    with open(file_path, "r", encoding="utf-8") as f:
         for line in f:
-            name, old_url = line.strip().split("|", 1)
-            previous[name] = old_url
+            if "|" not in line:
+                continue
+            filename, url = line.strip().split("|", 1)
+            if convert_complex:
+                encoded_url = urllib.parse.quote(url, safe='')
+                url = f"https://url.v1.mk/sub?&url={encoded_url}&target=clash&config=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FSleepyHeeead%2Fsubconverter-config%40master%2Fremote-config%2Funiversal%2Furltest.ini&emoji=false&append_type=true&append_info=true&scv=true&udp=true&list=true&sort=false&fdn=true&insert=false"
+            entries.append((filename, url))
+    return entries
 
-new_cache = []
-changes_detected = False
+def replace_url_in_text(text, new_url):
+    pattern = r'(url:\s*)([^\n]+)'
+    return re.sub(pattern, rf'\1{new_url}', text, count=1)
 
-# بارگذاری خطوط از فایل
-def load_lines(filepath):
-    if os.path.exists(filepath):
-        with open(filepath, "r", encoding="utf-8") as f:
-            return [line.strip() for line in f if "|" in line]
-    return []
+def main():
+    url_file_simple = "Simple_URL_List.txt"
+    url_file_complex = "Complex_URL_list.txt"
+    template_file = "mihomo_template.txt"
+    output_dir = "Sublist"
+    cache_file = ".last_urls.txt"
 
-lines = load_lines(simple_list)
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
 
-# پردازش فایل پیچیده‌تر
-complex_lines = load_lines(complex_list)
-for line in complex_lines:
-    filename, original_url = line.split("|", 1)
-    encoded_url = urllib.parse.quote(original_url, safe='')
-    converted_url = (
-        f"https://url.v1.mk/sub?&url={encoded_url}"
-        f"&target=clash&config=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FSleepyHeeead%2Fsubconverter-config%40master%2Fremote-config%2Funiversal%2Furltest.ini"
-        f"&emoji=false&append_type=true&append_info=true&scv=true&udp=true&list=true&sort=false&fdn=true&insert=false"
-    )
-    lines.append(f"{filename}|{converted_url}")
+    # Load previous cache
+    previous = {}
+    if os.path.exists(cache_file):
+        with open(cache_file, "r") as f:
+            for line in f:
+                name, old_url = line.strip().split("|", 1)
+                previous[name] = old_url
 
-# بررسی تغییرات
-for line in lines:
-    filename, new_url = line.split("|", 1)
-    old_url = previous.get(filename)
-    new_cache.append(f"{filename}|{new_url}")
+    # Load new entries
+    entries = []
+    entries += load_url_list(url_file_simple)
+    entries += load_url_list(url_file_complex, convert_complex=True)
 
-    if new_url != old_url:
-        changes_detected = True
-        print(f"🔄 در حال ساخت فایل: {filename}")
+    new_cache = []
+    changes_detected = False
 
-        with open(template_file, "r", encoding="utf-8") as tf:
-            data = yaml.load(tf)
+    for filename, new_url in entries:
+        old_url = previous.get(filename)
+        new_cache.append(f"{filename}|{new_url}")
 
-        if "proxy-providers" not in data or "proxy" not in data["proxy-providers"]:
-            raise Exception("❌ ساختار proxy-providers.proxy یافت نشد!")
+        if new_url != old_url:
+            changes_detected = True
+            print(f"🛠 ساخت فایل جدید برای: {filename}")
 
-        data["proxy-providers"]["proxy"]["url"] = new_url
+            # Read template as text
+            with open(template_file, "r", encoding="utf-8") as tf:
+                original_text = tf.read()
 
-        with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as outf:
-            yaml.dump(data, outf)
+            # Replace only the URL
+            modified_text = replace_url_in_text(original_text, new_url)
 
-# ذخیره کش جدید
-with open(cache_file, "w", encoding="utf-8") as f:
-    f.write("\n".join(new_cache))
+            # Save new YAML file
+            with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as outf:
+                outf.write(modified_text)
 
-if not changes_detected:
-    print("✅ تغییری وجود نداشت.")
+    # Save updated cache
+    with open(cache_file, "w", encoding="utf-8") as f:
+        f.write("\n".join(new_cache))
+
+    if not changes_detected:
+        print("✅ هیچ تغییری در URLها وجود نداشت.")
+
+if __name__ == "__main__":
+    main()
