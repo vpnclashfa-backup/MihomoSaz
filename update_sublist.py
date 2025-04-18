@@ -2,8 +2,8 @@ import os
 import urllib.parse
 import re
 
-# مسیر دایرکتوری اسکریپت (ریشه پروژه)
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+# در GH Actions معمولاً CWD ریشه مخزن است
+ROOT_DIR = os.getcwd()
 
 def load_url_list(file_path, convert_complex=False):
     entries = []
@@ -69,7 +69,7 @@ def write_current_mtime(mtime_file, mtime):
 
 def generate_readme(output_dir, entries):
     """
-    ساخت README.md در پوشه ریشه پروژه با لیست فایل‌های تولیدشده و لینک دانلودشان.
+    ساخت README.md در ریشه پروژه (ROOT_DIR).
     """
     lines = [
         "# Sublist Generator",
@@ -79,13 +79,8 @@ def generate_readme(output_dir, entries):
         "",
         "## Usage",
         "```bash",
-        "python script.py",
+        "python update_sublist.py",
         "```",
-        "",
-        "## Files",
-        "- Template: `mihomo_template.txt`",
-        "- Simple URL List: `Simple_URL_List.txt`",
-        "- Complex URL List: `Complex_URL_list.txt`",
         "",
         "## Generated Subscription Files",
         "",
@@ -93,10 +88,9 @@ def generate_readme(output_dir, entries):
         "| ---- | ---- |",
     ]
     for filename, _ in entries:
-        rel_path = os.path.join(output_dir, filename)
-        # ساخت لینک نسبی از ریشه پروژه
-        link = os.path.relpath(rel_path, SCRIPT_DIR).replace('\\', '/')
-        lines.append(f"| `{filename}` | [Download]({link}) |")
+        # لینک نسبی به فایل در پوشه خروجی
+        rel_path = os.path.join(output_dir, filename).replace('\\', '/')
+        lines.append(f"| `{filename}` | [Download]({rel_path}) |")
     lines += [
         "",
         "## Requirements",
@@ -107,7 +101,7 @@ def generate_readme(output_dir, entries):
         "MIT License",
     ]
 
-    readme_path = os.path.join(SCRIPT_DIR, "README.md")
+    readme_path = os.path.join(ROOT_DIR, "README.md")
     with open(readme_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
     print(f"📝 README.md created at: {readme_path}")
@@ -131,9 +125,7 @@ def main():
     if template_changed:
         print("🛠 قالب mihomo_template.txt تغییر کرده؛ بازسازی همه فایل‌ها")
 
-    entries = []
-    entries += load_url_list(url_file_simple)
-    entries += load_url_list(url_file_complex, convert_complex=True)
+    entries = load_url_list(url_file_simple) + load_url_list(url_file_complex, convert_complex=True)
 
     new_cache_entries = []
     changes_detected = False
@@ -145,19 +137,16 @@ def main():
         if template_changed or (new_url != old_url):
             changes_detected = True
             print(f"🛠 ساخت فایل جدید برای: {filename}")
-
             with open(template_file, "r", encoding="utf-8") as tf:
                 original_text = tf.read()
-
             modified_text = replace_url_in_text(original_text, new_url)
-
             with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as outf:
                 outf.write(modified_text)
 
     write_current_urls(cache_file, new_cache_entries)
     write_current_mtime(mtime_file, current_mtime)
 
-    # ساخت یا بروزرسانی README.md در ریشه پروژه
+    # ساخت یا بروزرسانی README.md در ریشه مخزن
     generate_readme(output_dir, entries)
 
     if not changes_detected and not template_changed:
