@@ -40,9 +40,11 @@ for line in lines:
         with open(template_file, "r", encoding="utf-8") as tf:
             data = yaml.safe_load(tf)
 
+        # اطمینان از وجود ساختار proxy-providers
         if "proxy-providers" not in data or "proxy" not in data["proxy-providers"]:
             raise Exception("ساختار proxy-providers یافت نشد!")
 
+        # تغییر URL در داده‌ها
         data["proxy-providers"]["proxy"]["url"] = new_url
 
         # ذخیره فایل جدید
