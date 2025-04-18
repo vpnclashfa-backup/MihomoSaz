@@ -1,0 +1,2 @@
+aiboboxx.yaml|https://raw.githubusercontent.com/aiboboxx/clashfree/refs/heads/main/clash.yml
+ripaojiedian.yaml|https://raw.githubusercontent.com/ripaojiedian/freenode/refs/heads/main/clash
