@@ -12,6 +12,7 @@ def load_url_list(file_path, convert_complex=False):
             if "|" not in line:
                 continue
             filename, url = line.strip().split("|", 1)
+            # فقط برای فایل پیچیده، URL را تبدیل می‌کنیم
             if convert_complex:
                 encoded_url = urllib.parse.quote(url, safe='')
                 url = (
