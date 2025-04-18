@@ -2,6 +2,9 @@ import os
 import urllib.parse
 import re
 
+# مسیر دایرکتوری اسکریپت (ریشه پروژه)
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 def load_url_list(file_path, convert_complex=False):
     entries = []
     if not os.path.exists(file_path):
@@ -65,7 +68,9 @@ def write_current_mtime(mtime_file, mtime):
 
 
 def generate_readme(output_dir, entries):
-    # Header and description
+    """
+    ساخت README.md در پوشه ریشه پروژه با لیست فایل‌های تولیدشده و لینک دانلودشان.
+    """
     lines = [
         "# Sublist Generator",
         "",
@@ -89,7 +94,9 @@ def generate_readme(output_dir, entries):
     ]
     for filename, _ in entries:
         rel_path = os.path.join(output_dir, filename)
-        lines.append(f"| `{filename}` | [Download]({rel_path}) |")
+        # ساخت لینک نسبی از ریشه پروژه
+        link = os.path.relpath(rel_path, SCRIPT_DIR).replace('\\', '/')
+        lines.append(f"| `{filename}` | [Download]({link}) |")
     lines += [
         "",
         "## Requirements",
@@ -99,8 +106,11 @@ def generate_readme(output_dir, entries):
         "## License",
         "MIT License",
     ]
-    with open("README.md", "w", encoding="utf-8") as f:
+
+    readme_path = os.path.join(SCRIPT_DIR, "README.md")
+    with open(readme_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
+    print(f"📝 README.md created at: {readme_path}")
 
 
 def main():
@@ -147,9 +157,8 @@ def main():
     write_current_urls(cache_file, new_cache_entries)
     write_current_mtime(mtime_file, current_mtime)
 
-    # Generate README.md with beautiful links
+    # ساخت یا بروزرسانی README.md در ریشه پروژه
     generate_readme(output_dir, entries)
-    print("📝 README.md generated")
 
     if not changes_detected and not template_changed:
         print("✅ هیچ تغییری در URL‌ها یا قالب وجود نداشت.")
