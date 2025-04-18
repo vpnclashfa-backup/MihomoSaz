@@ -1,0 +1,720 @@
+allow-lan: true
+bind-address: '*'
+dns:
+  enable: true
+  enhanced-mode: fake-ip
+  fake-ip-filter:
+  - '*.lan'
+  - '*.localdomain'
+  - '*.example'
+  - '*.invalid'
+  - '*.localhost'
+  - '*.test'
+  - '*.local'
+  - '*.home.arpa'
+  - time.*.com
+  - time.*.gov
+  - time.*.edu.cn
+  - time.*.apple.com
+  - time1.*.com
+  - time2.*.com
+  - time3.*.com
+  - time4.*.com
+  - time5.*.com
+  - time6.*.com
+  - time7.*.com
+  - ntp.*.com
+  - ntp1.*.com
+  - ntp2.*.com
+  - ntp3.*.com
+  - ntp4.*.com
+  - ntp5.*.com
+  - ntp6.*.com
+  - ntp7.*.com
+  - '*.time.edu.cn'
+  - '*.ntp.org.cn'
+  - +.pool.ntp.org
+  - time1.cloud.tencent.com
+  - music.163.com
+  - '*.music.163.com'
+  - '*.126.net'
+  - musicapi.taihe.com
+  - music.taihe.com
+  - songsearch.kugou.com
+  - trackercdn.kugou.com
+  - '*.kuwo.cn'
+  - api-jooxtt.sanook.com
+  - api.joox.com
+  - joox.com
+  - y.qq.com
+  - '*.y.qq.com'
+  - streamoc.music.tc.qq.com
+  - mobileoc.music.tc.qq.com
+  - isure.stream.qqmusic.qq.com
+  - dl.stream.qqmusic.qq.com
+  - aqqmusic.tc.qq.com
+  - amobile.music.tc.qq.com
+  - '*.xiami.com'
+  - '*.music.migu.cn'
+  - music.migu.cn
+  - '*.msftconnecttest.com'
+  - '*.msftncsi.com'
+  - msftconnecttest.com
+  - msftncsi.com
+  - localhost.ptlogin2.qq.com
+  - localhost.sec.qq.com
+  - +.srv.nintendo.net
+  - +.stun.playstation.net
+  - xbox.*.microsoft.com
+  - xnotify.xboxlive.com
+  - +.battlenet.com.cn
+  - +.wotgame.cn
+  - +.wggames.cn
+  - +.wowsgame.cn
+  - +.wargaming.net
+  - proxy.golang.org
+  - stun.*.*
+  - stun.*.*.*
+  - +.stun.*.*
+  - +.stun.*.*.*
+  - +.stun.*.*.*.*
+  - heartbeat.belkin.com
+  - '*.linksys.com'
+  - '*.linksyssmartwifi.com'
+  - '*.router.asus.com'
+  - mesu.apple.com
+  - swscan.apple.com
+  - swquery.apple.com
+  - swdownload.apple.com
+  - swcdn.apple.com
+  - swdist.apple.com
+  - lens.l.google.com
+  - stun.l.google.com
+  - +.nflxvideo.net
+  - '*.square-enix.com'
+  - '*.finalfantasyxiv.com'
+  - '*.ffxiv.com'
+  - '*.mcdn.bilivideo.cn'
+  - +.media.dssott.com
+  - connect.rom.miui.com
+  - '*.miwifi.com'
+  - '*.ntp.org'
+  - '*.u-tools.cn'
+  - '*.mediatek.com'
+  - '*.cfprefer1.xyz'
+  - '*.wetab.link'
+  - '*.tyasaka.xyz'
+  - localhost.ptlogin2.qq.com
+  - localhost.sec.qq.com
+  - localhost.work.weixin.qq.com
+  - '*.weixin.qq.com'
+  - '*.wechat.com'
+  - time.windows.com
+  - '*.wpsmail.net'
+  - '*.henzanapp.com'
+  - '*.pconline.com.cn'
+  fake-ip-range: 198.18.0.1/16
+  ipv6: true
+  listen: 0.0.0.0:7874
+  nameserver:
+  - https://dns.google/dns-query#h3=true
+  - https://cloudflare-dns.com/dns-query#h3=true
+  - https://dns.adguard-dns.com/dns-query#h3=true
+  - https://basic.rethinkdns.com/#h3=true
+  - https://dns.nextdns.io#h3=true
+  - https://1.1.1.1/dns-query
+  - https://dns.quad9.net/dns-query
+  - https://doh.opendns.com/dns-query
+  - https://dns.surfshark.com/dns-query
+  - https://8.8.8.8/dns-query
+  - https://9.9.9.9/dns-query
+  - https://doh.cleanbrowsing.org/doh/security-filter/
+  - https://resolver2.dns.watch/dns-query
+  - https://doh-de.blahdns.com/dns-query
+  - https://freedns.controld.com/p2
+  - https://dns.dnswarden.com/adblock
+  - https://adblock.doh.mullvad.net/dns-query
+  - tls://1.0.0.1:853
+  - tls://1.1.1.1:853
+  - tls://dns.google:853
+  - 162.159.36.1
+  - 162.159.46.1
+  - https://dns.aa.net.uk/dns-query
+  - https://xmission-slc-1.edge.nextdns.io/dns-query
+  - https://dns.controld.com/
+  - https://xtom-osa-1.edge.nextdns.io/dns-query
+  - https://ipv4-zepto-mci-1.edge.nextdns.io/dns-query
+  - https://zepto-sto-1.edge.nextdns.io
+  - https://doh.dns.sb/dns-query
+  - tls://8.8.8.8
+  prefer-h3: true
+  use-host: true
+enable-process: true
+experimental:
+  ignore-resolve-fail: true
+  sniff-tls-sni: true
+  tracing: true
+external-controller: 0.0.0.0:9090
+find-process-mode: strict
+global-client-fingerprint: chrome
+ipv6: true
+keep-alive-interval: 15
+log-level: debug
+mixed-port: 7893
+port: 7890
+profile:
+  store-fake-ip: true
+  store-selected: true
+proxy-groups:
+- name: "\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628 \u067E\
+    \u0631\u0648\u06A9\u0633\u06CC"
+  proxies:
+  - "\u062E\u0648\u062F\u06A9\u0627\u0631 (\u0628\u0647\u062A\u0631\u06CC\u0646 \u067E\
+    \u06CC\u0646\u06AF) \U0001F916"
+  - "\u062F\u0633\u062A\u06CC \U0001F90F\U0001F3FB"
+  - "\u067E\u0634\u062A\u06CC\u0628\u0627\u0646 (\u062F\u0631 \u0635\u0648\u0631\u062A\
+    \ \u0642\u0637\u0639\u06CC) \U0001F9EF"
+  - "\u062A\u0648\u0632\u06CC\u0639 \u0628\u0627\u0631 (\u067E\u0627\u06CC\u062F\u0627\
+    \u0631) \U0001F9F2"
+  - "\u062A\u0648\u0632\u06CC\u0639 \u0628\u0627\u0631 (\u06AF\u0631\u062F\u0634\u06CC\
+    ) \U0001F501"
+  - "\u26D4 \u0642\u0637\u0639 \u0627\u06CC\u0646\u062A\u0631\u0646\u062A"
+  - "\U0001F6E1\uFE0F \u0628\u062F\u0648\u0646 \u0641\u06CC\u0644\u062A\u0631\u0634\
+    \u06A9\u0646"
+  type: select
+- name: "\U0001F4F6 \u0627\u0646\u062A\u062E\u0627\u0628 \u0646\u0648\u0639 \u0627\
+    \u062A\u0635\u0627\u0644"
+  proxies:
+  - "\U0001F310 \u0647\u0645\u0647 \u0633\u0627\u06CC\u062A\u0627"
+  - "\U0001F510 \u0641\u0642\u0637 \u0633\u0627\u06CC\u062A\u0627\u06CC \u0641\u06CC\
+    \u0644\u062A\u0631 \u0634\u062F\u0647"
+  type: select
+- name: "\u062F\u0633\u062A\u06CC \U0001F90F\U0001F3FB"
+  type: select
+  use:
+  - proxy
+- include-all: true
+  interval: 600
+  lazy: true
+  max-failed-times: 5
+  name: "\u062E\u0648\u062F\u06A9\u0627\u0631 (\u0628\u0647\u062A\u0631\u06CC\u0646\
+    \ \u067E\u06CC\u0646\u06AF) \U0001F916"
+  timeout: 8000
+  tolerance: 600
+  type: url-test
+  url: https://api.v2fly.org/checkConnection.svgz
+  use:
+  - proxy
+- interval: 600
+  lazy: true
+  max-failed-times: 3
+  name: "\u067E\u0634\u062A\u06CC\u0628\u0627\u0646 (\u062F\u0631 \u0635\u0648\u0631\
+    \u062A \u0642\u0637\u0639\u06CC) \U0001F9EF"
+  timeout: 8000
+  type: fallback
+  url: https://api.v2fly.org/checkConnection.svgz
+  use:
+  - proxy
+- interval: 600
+  lazy: true
+  max-failed-times: 5
+  name: "\u062A\u0648\u0632\u06CC\u0639 \u0628\u0627\u0631 (\u067E\u0627\u06CC\u062F\
+    \u0627\u0631) \U0001F9F2"
+  timeout: 8000
+  type: load-balance
+  url: https://api.v2fly.org/checkConnection.svgz
+  use:
+  - proxy
+- interval: 600
+  lazy: true
+  max-failed-times: 3
+  name: "\u062A\u0648\u0632\u06CC\u0639 \u0628\u0627\u0631 (\u06AF\u0631\u062F\u0634\
+    \u06CC) \U0001F501"
+  strategy: round-robin
+  timeout: 8000
+  type: load-balance
+  url: https://api.v2fly.org/checkConnection.svgz
+  use:
+  - proxy
+- name: "\U0001F1EE\U0001F1F7 \u0633\u0627\u06CC\u062A\u0627\u06CC \u0627\u06CC\u0631\
+    \u0627\u0646\u06CC"
+  proxies:
+  - "\U0001F6E1\uFE0F \u0628\u062F\u0648\u0646 \u0641\u06CC\u0644\u062A\u0631\u0634\
+    \u06A9\u0646"
+  - "\U0001F6AB \u0627\u062C\u0627\u0632\u0647 \u0646\u062F\u0627\u062F\u0646"
+  - "\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628 \u067E\u0631\
+    \u0648\u06A9\u0633\u06CC"
+  type: select
+- name: "\U0001F4E5 \u062F\u0627\u0646\u0644\u0648\u062F \u0645\u0646\u06CC\u062C\u0631"
+  proxies:
+  - "\U0001F6E1\uFE0F \u0628\u062F\u0648\u0646 \u0641\u06CC\u0644\u062A\u0631\u0634\
+    \u06A9\u0646"
+  - "\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628 \u067E\u0631\
+    \u0648\u06A9\u0633\u06CC"
+  - "\U0001F6AB \u0627\u062C\u0627\u0632\u0647 \u0646\u062F\u0627\u062F\u0646"
+  type: select
+- name: "\U0001F3F4\u200D\u2620\uFE0F \u0633\u0627\u06CC\u062A\u0627\u06CC \u062A\u062D\
+    \u0631\u06CC\u0645\u06CC"
+  proxies:
+  - "\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628 \u067E\u0631\
+    \u0648\u06A9\u0633\u06CC"
+  - "\U0001F6E1\uFE0F \u0628\u062F\u0648\u0646 \u0641\u06CC\u0644\u062A\u0631\u0634\
+    \u06A9\u0646"
+  - "\U0001F6AB \u0627\u062C\u0627\u0632\u0647 \u0646\u062F\u0627\u062F\u0646"
+  type: select
+- name: "\U0001F4AC \u062A\u0644\u06AF\u0631\u0627\u0645"
+  proxies:
+  - "\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628 \u067E\u0631\
+    \u0648\u06A9\u0633\u06CC"
+  - "\U0001F6E1\uFE0F \u0628\u062F\u0648\u0646 \u0641\u06CC\u0644\u062A\u0631\u0634\
+    \u06A9\u0646"
+  - "\U0001F6AB \u0627\u062C\u0627\u0632\u0647 \u0646\u062F\u0627\u062F\u0646"
+  type: select
+- name: "\U0001F5A5\uFE0F \u0627\u0633\u062A\u06CC\u0645"
+  proxies:
+  - "\U0001F6E1\uFE0F \u0628\u062F\u0648\u0646 \u0641\u06CC\u0644\u062A\u0631\u0634\
+    \u06A9\u0646"
+  - "\U0001F6AB \u0627\u062C\u0627\u0632\u0647 \u0646\u062F\u0627\u062F\u0646"
+  - "\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628 \u067E\u0631\
+    \u0648\u06A9\u0633\u06CC"
+  type: select
+- name: "\U0001F3AE \u06AF\u06CC\u0645"
+  proxies:
+  - "\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628 \u067E\u0631\
+    \u0648\u06A9\u0633\u06CC"
+  - "\U0001F6E1\uFE0F \u0628\u062F\u0648\u0646 \u0641\u06CC\u0644\u062A\u0631\u0634\
+    \u06A9\u0646"
+  - "\U0001F6AB \u0627\u062C\u0627\u0632\u0647 \u0646\u062F\u0627\u062F\u0646"
+  type: select
+- name: "\U0001F4E1 \u062A\u0648\u06CC\u06CC\u0686"
+  proxies:
+  - "\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628 \u067E\u0631\
+    \u0648\u06A9\u0633\u06CC"
+  - "\U0001F6E1\uFE0F \u0628\u062F\u0648\u0646 \u0641\u06CC\u0644\u062A\u0631\u0634\
+    \u06A9\u0646"
+  - "\U0001F6AB \u0627\u062C\u0627\u0632\u0647 \u0646\u062F\u0627\u062F\u0646"
+  type: select
+- name: "\U0001F92C \u0633\u0627\u06CC\u062A\u0627\u06CC \u0633\u0627\u0646\u0633\u0648\
+    \u0631\u06CC"
+  proxies:
+  - "\U0001F6AB \u0627\u062C\u0627\u0632\u0647 \u0646\u062F\u0627\u062F\u0646"
+  - "\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628 \u067E\u0631\
+    \u0648\u06A9\u0633\u06CC"
+  - "\U0001F6E1\uFE0F \u0628\u062F\u0648\u0646 \u0641\u06CC\u0644\u062A\u0631\u0634\
+    \u06A9\u0646"
+  type: select
+- name: "\u26A0\uFE0F \u0633\u0627\u06CC\u062A\u0627\u06CC \u0645\u062E\u0631\u0628"
+  proxies:
+  - "\U0001F6AB \u0627\u062C\u0627\u0632\u0647 \u0646\u062F\u0627\u062F\u0646"
+  - "\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628 \u067E\u0631\
+    \u0648\u06A9\u0633\u06CC"
+  - "\U0001F6E1\uFE0F \u0628\u062F\u0648\u0646 \u0641\u06CC\u0644\u062A\u0631\u0634\
+    \u06A9\u0646"
+  type: select
+- name: "\U0001F18E \u062A\u0628\u0644\u06CC\u063A\u0627\u062A"
+  proxies:
+  - "\U0001F6AB \u0627\u062C\u0627\u0632\u0647 \u0646\u062F\u0627\u062F\u0646"
+  - "\U0001F6E1\uFE0F \u0628\u062F\u0648\u0646 \u0641\u06CC\u0644\u062A\u0631\u0634\
+    \u06A9\u0646"
+  - "\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628 \u067E\u0631\
+    \u0648\u06A9\u0633\u06CC"
+  type: select
+- name: "\U0001F343 \u062A\u0635\u0641\u06CC\u0647 \u0628\u0631\u0646\u0627\u0645\u0647"
+  proxies:
+  - "\U0001F6AB \u0627\u062C\u0627\u0632\u0647 \u0646\u062F\u0627\u062F\u0646"
+  - "\U0001F6E1\uFE0F \u0628\u062F\u0648\u0646 \u0641\u06CC\u0644\u062A\u0631\u0634\
+    \u06A9\u0646"
+  - "\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628 \u067E\u0631\
+    \u0648\u06A9\u0633\u06CC"
+  type: select
+- name: "\U0001F6D1 \u0631\u0647\u06AF\u06CC\u0631\u06CC \u062C\u0647\u0627\u0646\u06CC"
+  proxies:
+  - "\U0001F6AB \u0627\u062C\u0627\u0632\u0647 \u0646\u062F\u0627\u062F\u0646"
+  - "\U0001F6E1\uFE0F \u0628\u062F\u0648\u0646 \u0641\u06CC\u0644\u062A\u0631\u0634\
+    \u06A9\u0646"
+  - "\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628 \u067E\u0631\
+    \u0648\u06A9\u0633\u06CC"
+  type: select
+- hidden: true
+  name: "\U0001F6E1\uFE0F \u0628\u062F\u0648\u0646 \u0641\u06CC\u0644\u062A\u0631\u0634\
+    \u06A9\u0646"
+  proxies:
+  - DIRECT
+  type: select
+- hidden: true
+  name: "\u26D4 \u0642\u0637\u0639 \u0627\u06CC\u0646\u062A\u0631\u0646\u062A"
+  proxies:
+  - REJECT
+  type: select
+- hidden: true
+  name: "\U0001F6AB \u0627\u062C\u0627\u0632\u0647 \u0646\u062F\u0627\u062F\u0646"
+  proxies:
+  - REJECT
+  type: select
+- hidden: true
+  name: "\U0001F510 \u0641\u0642\u0637 \u0633\u0627\u06CC\u062A\u0627\u06CC \u0641\
+    \u06CC\u0644\u062A\u0631 \u0634\u062F\u0647"
+  proxies:
+  - DIRECT
+  type: select
+- hidden: true
+  name: "\U0001F310 \u0647\u0645\u0647 \u0633\u0627\u06CC\u062A\u0627"
+  proxies:
+  - "\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628 \u067E\u0631\
+    \u0648\u06A9\u0633\u06CC"
+  type: select
+proxy-providers:
+  proxy:
+    health-check:
+      enable: true
+      interval: 1800
+      lazy: true
+      url: https://www.gstatic.com/generate_204
+    include-all: true
+    interval: 86400
+    path: ./proxy.yaml
+    type: http
+    url: https://raw.githubusercontent.com/aiboboxx/clashfree/refs/heads/main/clash.yml
+redir-port: 7892
+rule-providers:
+  DownloadManagers:
+    behavior: classical
+    interval: 86400
+    path: ./ruleset/DownloadManagers.yaml
+    type: http
+    url: https://raw.githubusercontent.com/coldwater-10/clash_rules/refs/heads/main/DownloadManagers.yaml
+  Global:
+    behavior: classical
+    interval: 86400
+    path: ./ruleset/Global.yaml
+    type: http
+    url: https://raw.githubusercontent.com/coldwater-10/clash_rules/main/Global%20tracking.yaml
+  PersianBlocker:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/PersianBlocker.yaml
+    type: http
+    url: https://github.com/MasterKia/iran-hosted-domains/releases/latest/download/clash_rules_ads.yaml
+  Purification:
+    behavior: classical
+    interval: 86400
+    path: ./ruleset/Purification.yaml
+    type: http
+    url: https://raw.githubusercontent.com/coldwater-10/clash_rules/main/Purification%20app.yaml
+  Purification_ip:
+    behavior: classical
+    interval: 86400
+    path: ./ruleset/Purificationip.yaml
+    type: http
+    url: https://raw.githubusercontent.com/coldwater-10/clash_rules/main/Purification%20app%20ip.yaml
+  ads:
+    behavior: domain
+    format: yaml
+    interval: 86400
+    path: ./ruleset/ads.yaml
+    type: http
+    url: https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/category-ads-all.yaml
+  ads_ip:
+    behavior: classical
+    interval: 86400
+    path: ./ruleset/adsip.yaml
+    type: http
+    url: https://raw.githubusercontent.com/coldwater-10/clash_rules/main/ads%20ip.yaml
+  apps:
+    behavior: classical
+    format: yaml
+    interval: 86400
+    path: ./ruleset/apps.yaml
+    type: http
+    url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/apps.yaml
+  blocked:
+    behavior: classical
+    interval: 86400
+    path: ./ruleset/blocked.yaml
+    type: http
+    url: https://raw.githubusercontent.com/coldwater-10/clash_rules/main/blocked-sites.yml
+  category-games:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/category-games.yaml
+    type: http
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/refs/heads/generated/category-games.yaml
+  category_ir:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/category_ir.yaml
+    type: http
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/category-ir.yaml
+  category_porn:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/category_porn.yaml
+    type: http
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/category-porn.yaml
+  category_public_tracker:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/category_public_tracker.yaml
+    type: http
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/category-public-tracker.yaml
+  censor:
+    behavior: classical
+    interval: 86400
+    path: ./ruleset/tahrim.yaml
+    type: http
+    url: https://raw.githubusercontent.com/coldwater-10/clash_rules/main/censor.yaml
+  cryptominers:
+    behavior: domain
+    format: yaml
+    interval: 86400
+    path: ./ruleset/cryptominers.yaml
+    type: http
+    url: https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/cryptominers.yaml
+  facebook:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/facebook.yaml
+    type: http
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/facebook.yaml
+  game:
+    behavior: classical
+    interval: 86400
+    path: ./ruleset/game.yaml
+    type: http
+    url: https://raw.githubusercontent.com/coldwater-10/clash_rules/refs/heads/main/game.yaml
+  instagram:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/instagram.yaml
+    type: http
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/instagram.yaml
+  ir:
+    behavior: domain
+    format: yaml
+    interval: 86400
+    path: ./ruleset/ir.yaml
+    type: http
+    url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ir.yaml
+  iran:
+    behavior: classical
+    interval: 86400
+    path: ./ruleset/iran.yaml
+    type: http
+    url: https://raw.githubusercontent.com/coldwater-10/clash_rules/main/iran.yaml
+  iran_ads:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/iran_ads.yaml
+    type: http
+    url: https://github.com/bootmortis/iran-hosted-domains/releases/latest/download/clash_rules_ads.yaml
+  irasn:
+    behavior: classical
+    format: text
+    interval: 86400
+    path: ./ruleset/irasn.txt
+    type: http
+    url: https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/irasn.txt
+  ircidr:
+    behavior: ipcidr
+    format: yaml
+    interval: 86400
+    path: ./ruleset/ircidr.yaml
+    type: http
+    url: https://github.com/chocolate4u/Iran-clash-rules/releases/latest/download/ircidr.yaml
+  local_ips:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/local_ips.yaml
+    type: http
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/local-ips.yaml
+  malware:
+    behavior: domain
+    format: yaml
+    interval: 86400
+    path: ./ruleset/malware.yaml
+    type: http
+    url: https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/malware.yaml
+  openai:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/openai.yaml
+    type: http
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/openai.yaml
+  phishing:
+    behavior: domain
+    format: yaml
+    interval: 86400
+    path: ./ruleset/phishing.yaml
+    type: http
+    url: https://raw.githubusercontent.com/Chocolate4U/Iran-clash-rules/release/phishing.yaml
+  private:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/private.yaml
+    type: http
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/private.yaml
+  spotify:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/spotify.yaml
+    type: http
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/spotify.yaml
+  steam:
+    behavior: classical
+    interval: 86400
+    path: ./ruleset/steam.yaml
+    type: http
+    url: https://raw.githubusercontent.com/coldwater-10/clash_rules/main/steam.yaml
+  tahrim:
+    behavior: classical
+    interval: 86400
+    path: ./ruleset/tahrim.yaml
+    type: http
+    url: https://raw.githubusercontent.com/coldwater-10/clash_rules/main/tahrim.yaml
+  telegram:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/telegram.yaml
+    type: http
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/telegram.yaml
+  tiktok:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/tiktok.yaml
+    type: http
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/tiktok.yaml
+  twitch:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/twitch.yaml
+    type: http
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/twitch.yaml
+  twitter:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/twitter.yaml
+    type: http
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/twitter.yaml
+  whatsapp:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/whatsapp.yaml
+    type: http
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/whatsapp.yaml
+  youtube:
+    behavior: domain
+    interval: 86400
+    path: ./ruleset/youtube.yaml
+    type: http
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/youtube.yaml
+rules:
+- "RULE-SET,DownloadManagers,\U0001F4E5 \u062F\u0627\u0646\u0644\u0648\u062F \u0645\
+  \u0646\u06CC\u062C\u0631"
+- "RULE-SET,Purification_ip,\U0001F343 \u062A\u0635\u0641\u06CC\u0647 \u0628\u0631\
+  \u0646\u0627\u0645\u0647,no-resolve"
+- "RULE-SET,Purification,\U0001F343 \u062A\u0635\u0641\u06CC\u0647 \u0628\u0631\u0646\
+  \u0627\u0645\u0647"
+- "RULE-SET,category_public_tracker,\U0001F6D1 \u0631\u0647\u06AF\u06CC\u0631\u06CC\
+  \ \u062C\u0647\u0627\u0646\u06CC"
+- "RULE-SET,Global,\U0001F6D1 \u0631\u0647\u06AF\u06CC\u0631\u06CC \u062C\u0647\u0627\
+  \u0646\u06CC"
+- "RULE-SET,malware,\u26A0\uFE0F \u0633\u0627\u06CC\u062A\u0627\u06CC \u0645\u062E\
+  \u0631\u0628"
+- "RULE-SET,phishing,\u26A0\uFE0F \u0633\u0627\u06CC\u062A\u0627\u06CC \u0645\u062E\
+  \u0631\u0628"
+- "RULE-SET,cryptominers,\u26A0\uFE0F \u0633\u0627\u06CC\u062A\u0627\u06CC \u0645\u062E\
+  \u0631\u0628"
+- "RULE-SET,ads,\U0001F18E \u062A\u0628\u0644\u06CC\u063A\u0627\u062A"
+- "RULE-SET,iran_ads,\U0001F18E \u062A\u0628\u0644\u06CC\u063A\u0627\u062A"
+- "RULE-SET,PersianBlocker,\U0001F18E \u062A\u0628\u0644\u06CC\u063A\u0627\u062A"
+- "RULE-SET,ads_ip,\U0001F18E \u062A\u0628\u0644\u06CC\u063A\u0627\u062A,no-resolve"
+- "RULE-SET,twitch,\U0001F4E1 \u062A\u0648\u06CC\u06CC\u0686"
+- "PROCESS-NAME,Telegram.exe,\U0001F4AC \u062A\u0644\u06AF\u0631\u0627\u0645"
+- "RULE-SET,telegram,\U0001F4AC \u062A\u0644\u06AF\u0631\u0627\u0645"
+- "RULE-SET,blocked,\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628\
+  \ \u067E\u0631\u0648\u06A9\u0633\u06CC"
+- "RULE-SET,censor,\U0001F92C \u0633\u0627\u06CC\u062A\u0627\u06CC \u0633\u0627\u0646\
+  \u0633\u0648\u0631\u06CC"
+- "RULE-SET,local_ips,\U0001F6E1\uFE0F \u0628\u062F\u0648\u0646 \u0641\u06CC\u0644\
+  \u062A\u0631\u0634\u06A9\u0646"
+- "RULE-SET,private,\U0001F6E1\uFE0F \u0628\u062F\u0648\u0646 \u0641\u06CC\u0644\u062A\
+  \u0631\u0634\u06A9\u0646"
+- "RULE-SET,ircidr,\U0001F1EE\U0001F1F7 \u0633\u0627\u06CC\u062A\u0627\u06CC \u0627\
+  \u06CC\u0631\u0627\u0646\u06CC"
+- "RULE-SET,irasn,\U0001F1EE\U0001F1F7 \u0633\u0627\u06CC\u062A\u0627\u06CC \u0627\
+  \u06CC\u0631\u0627\u0646\u06CC"
+- "RULE-SET,category_ir,\U0001F1EE\U0001F1F7 \u0633\u0627\u06CC\u062A\u0627\u06CC\
+  \ \u0627\u06CC\u0631\u0627\u0646\u06CC"
+- "RULE-SET,iran,\U0001F1EE\U0001F1F7 \u0633\u0627\u06CC\u062A\u0627\u06CC \u0627\u06CC\
+  \u0631\u0627\u0646\u06CC"
+- "RULE-SET,ir,\U0001F1EE\U0001F1F7 \u0633\u0627\u06CC\u062A\u0627\u06CC \u0627\u06CC\
+  \u0631\u0627\u0646\u06CC"
+- "RULE-SET,apps,\U0001F1EE\U0001F1F7 \u0633\u0627\u06CC\u062A\u0627\u06CC \u0627\u06CC\
+  \u0631\u0627\u0646\u06CC"
+- "RULE-SET,steam,\U0001F5A5\uFE0F \u0627\u0633\u062A\u06CC\u0645"
+- "RULE-SET,game,\U0001F3AE \u06AF\u06CC\u0645"
+- "RULE-SET,category-games,\U0001F3AE \u06AF\u06CC\u0645"
+- "RULE-SET,tahrim,\U0001F3F4\u200D\u2620\uFE0F \u0633\u0627\u06CC\u062A\u0627\u06CC\
+  \ \u062A\u062D\u0631\u06CC\u0645\u06CC"
+- "RULE-SET,category_porn,\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\
+  \u0628 \u067E\u0631\u0648\u06A9\u0633\u06CC"
+- "RULE-SET,facebook,\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628\
+  \ \u067E\u0631\u0648\u06A9\u0633\u06CC"
+- "RULE-SET,youtube,\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628\
+  \ \u067E\u0631\u0648\u06A9\u0633\u06CC"
+- "RULE-SET,instagram,\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\
+  \u0628 \u067E\u0631\u0648\u06A9\u0633\u06CC"
+- "RULE-SET,spotify,\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628\
+  \ \u067E\u0631\u0648\u06A9\u0633\u06CC"
+- "RULE-SET,twitter,\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628\
+  \ \u067E\u0631\u0648\u06A9\u0633\u06CC"
+- "RULE-SET,openai,\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628\
+  \ \u067E\u0631\u0648\u06A9\u0633\u06CC"
+- "RULE-SET,whatsapp,\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628\
+  \ \u067E\u0631\u0648\u06A9\u0633\u06CC"
+- "RULE-SET,tiktok,\U0001F500 \u0646\u0648\u0639 \u0627\u0646\u062A\u062E\u0627\u0628\
+  \ \u067E\u0631\u0648\u06A9\u0633\u06CC"
+- "MATCH,\U0001F4F6 \u0627\u0646\u062A\u062E\u0627\u0628 \u0646\u0648\u0639 \u0627\
+  \u062A\u0635\u0627\u0644"
+secret: ''
+sniffer:
+  enable: true
+  force-domain:
+  - +.v2ex.com
+  - www.google.com
+  - google.com
+  port-whitelist:
+  - '80'
+  - '443'
+  skip-domain:
+  - Mijia Cloud
+  - dlg.io.mi.com
+  sniff:
+    http:
+      override-destination: true
+      ports:
+      - 1-442
+      - 444-8442
+      - 8444-65535
+    tls:
+      override-destination: true
+      ports:
+      - 1-79
+      - 81-8079
+      - 8081-65535
+  sniffing:
+  - tls
+  - http
+socks-port: 7891
+tcp-concurrent: true
+tun:
+  auto-detect-interface: true
+  auto-redir: true
+  auto-route: true
+  dns-hijack:
+  - any:53
+  - any:53
+  - tcp://any:53
+  enable: true
+  stack: mixed
+unified-delay: true
