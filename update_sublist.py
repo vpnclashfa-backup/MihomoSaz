@@ -12,6 +12,7 @@ def load_url_list(file_path, convert_complex=False):
             if "|" not in line:
                 continue
             filename, url = line.strip().split("|", 1)
+            # فقط برای فایل پیچیده، URL را تبدیل می‌کنیم
             if convert_complex:
                 encoded_url = urllib.parse.quote(url, safe='')
                 url = (
@@ -27,11 +28,9 @@ def load_url_list(file_path, convert_complex=False):
             entries.append((filename, url))
     return entries
 
-
 def replace_url_in_text(text, new_url):
     pattern = r'(url:\s*)([^\n]+)'
     return re.sub(pattern, rf'\1{new_url}', text, count=1)
-
 
 def read_previous_urls(cache_file):
     previous = {}
@@ -44,12 +43,10 @@ def read_previous_urls(cache_file):
                 previous[name] = old_url
     return previous
 
-
 def write_current_urls(cache_file, entries):
     with open(cache_file, "w", encoding="utf-8") as f:
         for name, url in entries:
             f.write(f"{name}|{url}\n")
-
 
 def read_previous_mtime(mtime_file):
     try:
@@ -58,46 +55,48 @@ def read_previous_mtime(mtime_file):
     except:
         return None
 
-
 def write_current_mtime(mtime_file, mtime):
     with open(mtime_file, "w", encoding="utf-8") as f:
         f.write(str(mtime))
 
-
 def generate_readme(output_dir, entries):
+    readme_path = os.path.join(os.getcwd(), "README.md")
+
     lines = [
-        "# Sublist Generator",
+        "# 📦 Sublist Generator",
         "",
-        "This project automatically generates Clash-compatible subscription files based on URL lists and a template.",
-        "Each time the URL lists or the template change, the script regenerates the outputs.",
+        "> 🚀 این پروژه فایل‌های اشتراک Clash رو از روی URLها و قالب سفارشی به‌صورت خودکار تولید می‌کند.",
         "",
-        "## Usage",
-        "
-bash",
-        "python script.py",
-        "
-",
+        "## ⬇️ لینک فایل‌ها",
         "",
-        "## Files",
-        "- Template: mihomo_template.txt",
-        "- Simple URL List: Simple_URL_List.txt",
-        "- Complex URL List: Complex_URL_list.txt",
-        f"- Output Directory: {output_dir} contains:",
     ]
     for filename, _ in entries:
-        lines.append(f"  - {filename}")
+        file_url = f"https://github.com/10ium/MihomoSaz/raw/main/{output_dir}/{urllib.parse.quote(filename)}"
+        lines.append(f"- [📄 {filename}]({file_url})")
+
     lines += [
         "",
-        "## Requirements",
-        "- Python 3.x",
-        "- Standard Library only",
+        "## ⚙️ نحوه استفاده",
+        "```bash",
+        "python update_sublist.py",
+        "```",
         "",
-        "## License",
+        "## 📁 ساختار پروژه",
+        "- قالب: `mihomo_template.txt`",
+        "- لیست ساده: `Simple_URL_List.txt`",
+        "- لیست پیچیده: `Complex_URL_list.txt`",
+        f"- پوشه خروجی: `{output_dir}/`",
+        "",
+        "## 🧰 پیش‌نیازها",
+        "- Python 3.x",
+        "- بدون نیاز به کتابخانه خارجی (فقط استاندارد)",
+        "",
+        "## 🪪 License",
         "MIT License",
     ]
-    with open("README.md", "w", encoding="utf-8") as f:
-        f.write("\n".join(lines))
 
+    with open(readme_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
 
 def main():
     url_file_simple = "Simple_URL_List.txt"
@@ -118,8 +117,10 @@ def main():
         print("🛠 قالب mihomo_template.txt تغییر کرده؛ بازسازی همه فایل‌ها")
 
     entries = []
-    entries += load_url_list(url_file_simple)
-    entries += load_url_list(url_file_complex, convert_complex=True)
+    
+    # فایل‌های ساده و پیچیده را جداگانه بارگذاری می‌کنیم
+    entries += load_url_list(url_file_simple, convert_complex=False)  # برای Simple_URL_List.txt باید convert_complex=False باشد
+    entries += load_url_list(url_file_complex, convert_complex=True)  # برای Complex_URL_list.txt باید convert_complex=True باشد
 
     new_cache_entries = []
     changes_detected = False
@@ -145,7 +146,7 @@ def main():
 
     # Generate README.md
     generate_readme(output_dir, entries)
-    print("📝 README.md generated")
+    print("📝 README.md ساخته شد.")
 
     if not changes_detected and not template_changed:
         print("✅ هیچ تغییری در URL‌ها یا قالب وجود نداشت.")
