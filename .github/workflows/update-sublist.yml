@@ -1,27 +1,27 @@
-name: Update Mihomo Proxy Config
+name: به‌روزرسانی Sublist برای Mihomo
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # Runs every 24 hours
-  workflow_dispatch:     # Allows manual trigger
+    - cron: '0 0 * * *'  # اجرای خودکار هر روز رأس ساعت ۰۰:۰۰ UTC
+  workflow_dispatch:     # امکان اجرای دستی
 
 jobs:
   update-sublist:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repo
+      - name: کلون کردن ریپو
         uses: actions/checkout@v3
 
-      - name: Set up Python
+      - name: نصب پایتون
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
-      - name: Install PyYAML
+      - name: نصب PyYAML
         run: pip install pyyaml
 
-      - name: Update Proxy Configs
+      - name: بررسی و ساخت فایل‌های جدید
         run: |
           import os
           import yaml
@@ -34,7 +34,7 @@ jobs:
           if not os.path.exists(output_dir):
               os.makedirs(output_dir)
 
-          # Read previous URLs to detect changes
+          # خواندن URLهای قبلی
           previous = {}
           if os.path.exists(cache_file):
               with open(cache_file, "r") as f:
@@ -57,29 +57,32 @@ jobs:
 
               if new_url != old_url:
                   changes_detected = True
+                  print(f"🔄 URL تغییر یافته یا جدید برای فایل: {filename}")
+
+                  # بارگذاری تمپلیت و ویرایش URL
                   with open(template_file, "r") as tf:
                       data = yaml.safe_load(tf)
 
                   data["proxy-providers"]["proxy"]["url"] = new_url
 
+                  # ذخیره فایل جدید
                   output_path = os.path.join(output_dir, filename)
-                  with open(output_path, "w") as outf:
-                      yaml.dump(data, outf, default_flow_style=False)
+                  with open(output_path, "w", encoding="utf-8") as outf:
+                      yaml.dump(data, outf, default_flow_style=False, allow_unicode=True)
 
-          # Update cache
+          # ذخیره URLهای جدید در کش
           with open(cache_file, "w") as f:
               f.write("\n".join(new_cache))
 
           if not changes_detected:
-              print("No changes detected in URLs.")
+              print("✅ هیچ تغییری در URLها شناسایی نشد.")
 
         shell: python
 
-      - name: Commit & Push if Changes
+      - name: کامیت و پوش کردن اگر فایلی تغییر کرده بود
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
           git add Sublist/ .last_urls.txt
-          git diff --quiet && git diff --staged --quiet || git commit -m "Update Sublist configs from Simple_URL_List.txt"
+          git diff --cached --quiet || git commit -m "🔁 به‌روزرسانی Sublist بر اساس Simple_URL_List.txt"
           git push
