@@ -13,14 +13,18 @@ def main():
     if os.path.exists(cache_file):
         with open(cache_file, "r") as f:
             for line in f:
-                name, old_url = line.strip().split("|", 1)
-                previous[name] = old_url
+                if "|" in line:
+                    name, old_url = line.strip().split("|", 1)
+                    previous[name] = old_url
 
-    # Load entries from both files
+    # Load entries
     simple_entries = load_url_list(url_file_simple, convert_complex=False)
     complex_entries = load_url_list(url_file_complex, convert_complex=True)
-
     all_entries = simple_entries + complex_entries
+
+    print("📥 URLهایی که باید پردازش شوند:")
+    for filename, url in all_entries:
+        print(f"  - {filename} | {url}")
 
     new_cache = []
     changes_detected = False
@@ -31,7 +35,7 @@ def main():
 
         if new_url != old_url:
             changes_detected = True
-            print(f"🛠 ساخت فایل جدید برای: {filename}")
+            print(f"🛠 ساخت یا به‌روزرسانی فایل: {filename}")
 
             # Read template as text
             with open(template_file, "r", encoding="utf-8") as tf:
