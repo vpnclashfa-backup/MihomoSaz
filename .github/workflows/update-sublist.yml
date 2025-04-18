@@ -1,0 +1,88 @@
+name: به‌روزرسانی Sublist برای Mihomo
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # اجرای خودکار هر روز رأس ساعت ۰۰:۰۰ UTC
+  workflow_dispatch:     # امکان اجرای دستی
+
+jobs:
+  update-sublist:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: کلون کردن ریپو
+        uses: actions/checkout@v3
+
+      - name: نصب پایتون
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: نصب PyYAML
+        run: pip install pyyaml
+
+      - name: بررسی و ساخت فایل‌های جدید
+        run: |
+          import os
+          import yaml
+
+          url_file = "Simple_URL_List.txt"
+          template_file = "mihomo_template.txt"
+          output_dir = "Sublist"
+          cache_file = ".last_urls.txt"
+
+          if not os.path.exists(output_dir):
+              os.makedirs(output_dir)
+
+          # خواندن URLهای قبلی
+          previous = {}
+          if os.path.exists(cache_file):
+              with open(cache_file, "r") as f:
+                  for line in f:
+                      name, old_url = line.strip().split("|", 1)
+                      previous[name] = old_url
+
+          new_cache = []
+          changes_detected = False
+
+          with open(url_file, "r") as f:
+              lines = [line.strip() for line in f if line.strip()]
+
+          for line in lines:
+              if "|" not in line:
+                  continue
+              filename, new_url = line.split("|", 1)
+              old_url = previous.get(filename)
+              new_cache.append(f"{filename}|{new_url}")
+
+              if new_url != old_url:
+                  changes_detected = True
+                  print(f"🔄 URL تغییر یافته یا جدید برای فایل: {filename}")
+
+                  # بارگذاری تمپلیت و ویرایش URL
+                  with open(template_file, "r") as tf:
+                      data = yaml.safe_load(tf)
+
+                  data["proxy-providers"]["proxy"]["url"] = new_url
+
+                  # ذخیره فایل جدید
+                  output_path = os.path.join(output_dir, filename)
+                  with open(output_path, "w", encoding="utf-8") as outf:
+                      yaml.dump(data, outf, default_flow_style=False, allow_unicode=True)
+
+          # ذخیره URLهای جدید در کش
+          with open(cache_file, "w") as f:
+              f.write("\n".join(new_cache))
+
+          if not changes_detected:
+              print("✅ هیچ تغییری در URLها شناسایی نشد.")
+
+        shell: python
+
+      - name: کامیت و پوش کردن اگر فایلی تغییر کرده بود
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Sublist/ .last_urls.txt
+          git diff --cached --quiet || git commit -m "🔁 به‌روزرسانی Sublist بر اساس Simple_URL_List.txt"
+          git push
