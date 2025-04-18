@@ -2,9 +2,6 @@ import os
 import urllib.parse
 import re
 
-# در GH Actions معمولاً CWD ریشه مخزن است
-ROOT_DIR = os.getcwd()
-
 def load_url_list(file_path, convert_complex=False):
     entries = []
     if not os.path.exists(file_path):
@@ -30,11 +27,9 @@ def load_url_list(file_path, convert_complex=False):
             entries.append((filename, url))
     return entries
 
-
 def replace_url_in_text(text, new_url):
     pattern = r'(url:\s*)([^\n]+)'
     return re.sub(pattern, rf'\1{new_url}', text, count=1)
-
 
 def read_previous_urls(cache_file):
     previous = {}
@@ -47,12 +42,10 @@ def read_previous_urls(cache_file):
                 previous[name] = old_url
     return previous
 
-
 def write_current_urls(cache_file, entries):
     with open(cache_file, "w", encoding="utf-8") as f:
         for name, url in entries:
             f.write(f"{name}|{url}\n")
-
 
 def read_previous_mtime(mtime_file):
     try:
@@ -61,51 +54,48 @@ def read_previous_mtime(mtime_file):
     except:
         return None
 
-
 def write_current_mtime(mtime_file, mtime):
     with open(mtime_file, "w", encoding="utf-8") as f:
         f.write(str(mtime))
 
-
 def generate_readme(output_dir, entries):
-    """
-    ساخت README.md در ریشه پروژه (ROOT_DIR).
-    """
+    readme_path = os.path.join(os.getcwd(), "README.md")
+
     lines = [
-        "# Sublist Generator",
+        "# 📦 Sublist Generator",
         "",
-        "This project automatically generates Clash-compatible subscription files based on URL lists and a template.",
-        "Each time the URL lists or the template change, the script regenerates the outputs.",
+        "> 🚀 این پروژه فایل‌های اشتراک Clash رو از روی URLها و قالب سفارشی به‌صورت خودکار تولید می‌کند.",
         "",
-        "## Usage",
+        "## ⬇️ لینک فایل‌ها",
+        "",
+    ]
+    for filename, _ in entries:
+        file_url = f"https://github.com/10ium/MihomoSaz/raw/main/{output_dir}/{urllib.parse.quote(filename)}"
+        lines.append(f"- [📄 {filename}]({file_url})")
+
+    lines += [
+        "",
+        "## ⚙️ نحوه استفاده",
         "```bash",
         "python update_sublist.py",
         "```",
         "",
-        "## Generated Subscription Files",
+        "## 📁 ساختار پروژه",
+        "- قالب: `mihomo_template.txt`",
+        "- لیست ساده: `Simple_URL_List.txt`",
+        "- لیست پیچیده: `Complex_URL_list.txt`",
+        f"- پوشه خروجی: `{output_dir}/`",
         "",
-        "| File | Link |",
-        "| ---- | ---- |",
-    ]
-    for filename, _ in entries:
-        # لینک نسبی به فایل در پوشه خروجی
-        rel_path = os.path.join(output_dir, filename).replace('\\', '/')
-        lines.append(f"| `{filename}` | [Download]({rel_path}) |")
-    lines += [
-        "",
-        "## Requirements",
+        "## 🧰 پیش‌نیازها",
         "- Python 3.x",
-        "- Standard Library only",
+        "- بدون نیاز به کتابخانه خارجی (فقط استاندارد)",
         "",
-        "## License",
+        "## 🪪 License",
         "MIT License",
     ]
 
-    readme_path = os.path.join(ROOT_DIR, "README.md")
     with open(readme_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
-    print(f"📝 README.md created at: {readme_path}")
-
 
 def main():
     url_file_simple = "Simple_URL_List.txt"
@@ -125,7 +115,9 @@ def main():
     if template_changed:
         print("🛠 قالب mihomo_template.txt تغییر کرده؛ بازسازی همه فایل‌ها")
 
-    entries = load_url_list(url_file_simple) + load_url_list(url_file_complex, convert_complex=True)
+    entries = []
+    entries += load_url_list(url_file_simple)
+    entries += load_url_list(url_file_complex, convert_complex=True)
 
     new_cache_entries = []
     changes_detected = False
@@ -137,17 +129,21 @@ def main():
         if template_changed or (new_url != old_url):
             changes_detected = True
             print(f"🛠 ساخت فایل جدید برای: {filename}")
+
             with open(template_file, "r", encoding="utf-8") as tf:
                 original_text = tf.read()
+
             modified_text = replace_url_in_text(original_text, new_url)
+
             with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as outf:
                 outf.write(modified_text)
 
     write_current_urls(cache_file, new_cache_entries)
     write_current_mtime(mtime_file, current_mtime)
 
-    # ساخت یا بروزرسانی README.md در ریشه مخزن
+    # Generate README.md
     generate_readme(output_dir, entries)
+    print("📝 README.md ساخته شد.")
 
     if not changes_detected and not template_changed:
         print("✅ هیچ تغییری در URL‌ها یا قالب وجود نداشت.")
