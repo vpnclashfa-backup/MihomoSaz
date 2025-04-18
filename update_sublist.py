@@ -118,9 +118,11 @@ def main():
 
     entries = []
     
-    # فایل‌های ساده و پیچیده را جداگانه بارگذاری می‌کنیم
-    entries += load_url_list(url_file_simple, convert_complex=False)  # برای Simple_URL_List.txt باید convert_complex=False باشد
-    entries += load_url_list(url_file_complex, convert_complex=True)  # برای Complex_URL_list.txt باید convert_complex=True باشد
+    # فقط URLهای مربوط به فایل Simple_URL_List.txt بدون تغییر
+    entries += load_url_list(url_file_simple, convert_complex=False)  # برای Simple_URL_List.txt هیچ تبدیلی صورت نمی‌گیرد
+
+    # فقط URLهای مربوط به فایل Complex_URL_list.txt به فرمت پیچیده تبدیل می‌شوند
+    entries += load_url_list(url_file_complex, convert_complex=True)  # برای Complex_URL_list.txt URLها به فرمت پیچیده تبدیل می‌شوند
 
     new_cache_entries = []
     changes_detected = False
