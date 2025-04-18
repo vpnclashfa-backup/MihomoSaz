@@ -14,13 +14,88 @@ def load_url_list(file_path, convert_complex=False):
             filename, url = line.strip().split("|", 1)
             if convert_complex:
                 encoded_url = urllib.parse.quote(url, safe='')
-                url = f"https://url.v1.mk/sub?&url={encoded_url}&target=clash&config=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FSleepyHeeead%2Fsubconverter-config%40master%2Fremote-config%2Funiversal%2Furltest.ini&emoji=false&append_type=true&append_info=true&scv=true&udp=true&list=true&sort=false&fdn=true&insert=false"
+                url = (
+                    "https://url.v1.mk/sub?&url="
+                    f"{encoded_url}&target=clash&config="
+                    "https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FSleepyHeeead"
+                    "%2Fsubconverter-config%40master%2Fremote-config"
+                    "%2Funiversal%2Furltest.ini&emoji=false"
+                    "&append_type=true&append_info=true&scv=true"
+                    "&udp=true&list=true&sort=false&fdn=true"
+                    "&insert=false"
+                )
             entries.append((filename, url))
     return entries
+
 
 def replace_url_in_text(text, new_url):
     pattern = r'(url:\s*)([^\n]+)'
     return re.sub(pattern, rf'\1{new_url}', text, count=1)
+
+
+def read_previous_urls(cache_file):
+    previous = {}
+    if os.path.exists(cache_file):
+        with open(cache_file, "r", encoding="utf-8") as f:
+            for line in f:
+                if "|" not in line:
+                    continue
+                name, old_url = line.strip().split("|", 1)
+                previous[name] = old_url
+    return previous
+
+
+def write_current_urls(cache_file, entries):
+    with open(cache_file, "w", encoding="utf-8") as f:
+        for name, url in entries:
+            f.write(f"{name}|{url}\n")
+
+
+def read_previous_mtime(mtime_file):
+    try:
+        with open(mtime_file, "r", encoding="utf-8") as f:
+            return float(f.read().strip())
+    except:
+        return None
+
+
+def write_current_mtime(mtime_file, mtime):
+    with open(mtime_file, "w", encoding="utf-8") as f:
+        f.write(str(mtime))
+
+
+def generate_readme(output_dir, entries):
+    lines = [
+        "# Sublist Generator",
+        "",
+        "This project automatically generates Clash-compatible subscription files based on URL lists and a template.",
+        "Each time the URL lists or the template change, the script regenerates the outputs.",
+        "",
+        "## Usage",
+        "```bash",
+        "python script.py",
+        "```",
+        "",
+        "## Files",
+        "- Template: `mihomo_template.txt`",
+        "- Simple URL List: `Simple_URL_List.txt`",
+        "- Complex URL List: `Complex_URL_list.txt`",
+        f"- Output Directory: `{output_dir}` contains:",
+    ]
+    for filename, _ in entries:
+        lines.append(f"  - `{filename}`")
+    lines += [
+        "",
+        "## Requirements",
+        "- Python 3.x",
+        "- Standard Library only",
+        "",
+        "## License",
+        "MIT License",
+    ]
+    with open("README.md", "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
+
 
 def main():
     url_file_simple = "Simple_URL_List.txt"
@@ -28,51 +103,50 @@ def main():
     template_file = "mihomo_template.txt"
     output_dir = "Sublist"
     cache_file = ".last_urls.txt"
+    mtime_file = ".last_template_mtime"
 
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    # Load previous cache
-    previous = {}
-    if os.path.exists(cache_file):
-        with open(cache_file, "r") as f:
-            for line in f:
-                name, old_url = line.strip().split("|", 1)
-                previous[name] = old_url
+    previous_urls = read_previous_urls(cache_file)
+    previous_mtime = read_previous_mtime(mtime_file)
+    current_mtime = os.path.getmtime(template_file)
+    template_changed = (previous_mtime is None) or (current_mtime != previous_mtime)
+    if template_changed:
+        print("🛠 قالب mihomo_template.txt تغییر کرده؛ بازسازی همه فایل‌ها")
 
-    # Load new entries
     entries = []
     entries += load_url_list(url_file_simple)
     entries += load_url_list(url_file_complex, convert_complex=True)
 
-    new_cache = []
+    new_cache_entries = []
     changes_detected = False
 
     for filename, new_url in entries:
-        old_url = previous.get(filename)
-        new_cache.append(f"{filename}|{new_url}")
+        old_url = previous_urls.get(filename)
+        new_cache_entries.append((filename, new_url))
 
-        if new_url != old_url:
+        if template_changed or (new_url != old_url):
             changes_detected = True
             print(f"🛠 ساخت فایل جدید برای: {filename}")
 
-            # Read template as text
             with open(template_file, "r", encoding="utf-8") as tf:
                 original_text = tf.read()
 
-            # Replace only the URL
             modified_text = replace_url_in_text(original_text, new_url)
 
-            # Save new YAML file
             with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as outf:
                 outf.write(modified_text)
 
-    # Save updated cache
-    with open(cache_file, "w", encoding="utf-8") as f:
-        f.write("\n".join(new_cache))
+    write_current_urls(cache_file, new_cache_entries)
+    write_current_mtime(mtime_file, current_mtime)
 
-    if not changes_detected:
-        print("✅ هیچ تغییری در URLها وجود نداشت.")
+    # Generate README.md
+    generate_readme(output_dir, entries)
+    print("📝 README.md generated")
+
+    if not changes_detected and not template_changed:
+        print("✅ هیچ تغییری در URL‌ها یا قالب وجود نداشت.")
 
 if __name__ == "__main__":
     main()
