@@ -2,7 +2,7 @@ name: به‌روزرسانی Sublist
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0 * * *'  # هر روز ساعت ۰۰:۰۰ UTC
   workflow_dispatch:
 
 permissions:
@@ -16,23 +16,18 @@ jobs:
       - name: کلون کردن ریپو
         uses: actions/checkout@v3
 
-      - name: نصب پایتون
+      - name: نصب پایتون و ruamel.yaml
         run: |
           python3 -m pip install --upgrade pip
+          pip install ruamel.yaml
 
       - name: اجرای اسکریپت Python
         run: python3 update_sublist.py
 
       - name: Commit و Push در صورت تغییر
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # افزودن فایل‌ها با مدیریت خطا
-          git add --ignore-errors Sublist/ .cache_simple.txt .cache_complex.txt .last_template_mtime README.md
-          
-          # Commit فقط در صورت وجود تغییرات
-          git diff --cached --quiet || {
-            git commit -m "🔁 به‌روزرسانی خودکار فایل‌ها"
-            git push
-          }
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Sublist/ .last_urls.txt || true
+          git diff --cached --quiet || git commit -m "🔁 به‌روزرسانی Sublist از Simple_URL_List.txt"
+          git push
