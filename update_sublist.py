@@ -1,27 +1,3 @@
-import os
-import urllib.parse
-import re
-
-def load_url_list(file_path, convert_complex=False):
-    entries = []
-    if not os.path.exists(file_path):
-        return entries
-
-    with open(file_path, "r", encoding="utf-8") as f:
-        for line in f:
-            if "|" not in line:
-                continue
-            filename, url = line.strip().split("|", 1)
-            if convert_complex:
-                encoded_url = urllib.parse.quote(url, safe='')
-                url = f"https://url.v1.mk/sub?&url={encoded_url}&target=clash&config=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FSleepyHeeead%2Fsubconverter-config%40master%2Fremote-config%2Funiversal%2Furltest.ini&emoji=false&append_type=true&append_info=true&scv=true&udp=true&list=true&sort=false&fdn=true&insert=false"
-            entries.append((filename, url))
-    return entries
-
-def replace_url_in_text(text, new_url):
-    pattern = r'(url:\s*)([^\n]+)'
-    return re.sub(pattern, rf'\1{new_url}', text, count=1)
-
 def main():
     url_file_simple = "Simple_URL_List.txt"
     url_file_complex = "Complex_URL_list.txt"
@@ -40,15 +16,16 @@ def main():
                 name, old_url = line.strip().split("|", 1)
                 previous[name] = old_url
 
-    # Load new entries
-    entries = []
-    entries += load_url_list(url_file_simple)
-    entries += load_url_list(url_file_complex, convert_complex=True)
+    # Load entries from both files
+    simple_entries = load_url_list(url_file_simple, convert_complex=False)
+    complex_entries = load_url_list(url_file_complex, convert_complex=True)
+
+    all_entries = simple_entries + complex_entries
 
     new_cache = []
     changes_detected = False
 
-    for filename, new_url in entries:
+    for filename, new_url in all_entries:
         old_url = previous.get(filename)
         new_cache.append(f"{filename}|{new_url}")
 
@@ -73,6 +50,3 @@ def main():
 
     if not changes_detected:
         print("✅ هیچ تغییری در URLها وجود نداشت.")
-
-if __name__ == "__main__":
-    main()
