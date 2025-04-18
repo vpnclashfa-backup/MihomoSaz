@@ -1,2 +1,7 @@
 10ium_V2Hub3_vmess.yaml|https://raw.githubusercontent.com/10ium/V2Hub3/main/Split/Base64/vmess
-10ium_V2Hub3_vless.yaml|https://raw.githubusercontent.com/10ium/V2Hub3/main/Split/Base64/vless
+10ium_V2Hub3_reality.yaml|https://raw.githubusercontent.com/10ium/V2Hub3/main/Split/Base64/reality
+10ium_V2Hub3_shadowsocks.yaml|https://raw.githubusercontent.com/10ium/V2Hub3/main/Split/Base64/shadowsocks
+10ium_V2Hub3_trojan.yaml|https://raw.githubusercontent.com/10ium/V2Hub3/main/Split/Base64/trojan
+10ium-multi-proxy-config-fetcher.yaml|https://raw.githubusercontent.com/10ium/multi-proxy-config-fetcher/refs/heads/main/configs/singbox_configs.json
+shabane.yaml|https://raw.githubusercontent.com/shabane/kamaji/master/hub/tested/b64/merged.txt
+roosterkid.yaml|https://raw.githubusercontent.com/roosterkid/openproxylist/refs/heads/main/V2RAY_BASE64.txt
