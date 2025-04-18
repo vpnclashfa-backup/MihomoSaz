@@ -1,59 +1,57 @@
-import os
-import yaml
+secret: ''
+sniffer:
+  enable: true
+  force-domain:
+  - +.v2ex.com
+  - www.google.com
+  - google.com
+  port-whitelist:
+  - '80'
+  - '443'
+  skip-domain:
+  - Mijia Cloud
+  - dlg.io.mi.com
+  sniff:
+    http:
+      override-destination: true
+      ports:
+      - 1-442
+      - 444-8442
+      - 8444-65535
+    tls:
+      override-destination: true
+      ports:
+      - 1-79
+      - 81-8079
+      - 8081-65535
+  sniffing:
+  - tls
+  - http
+socks-port: 7891
+tcp-concurrent: true
+tun:
+  auto-detect-interface: true
+  auto-redir: true
+  auto-route: true
+  dns-hijack:
+  - any:53
+  - any:53
+  - tcp://any:53
+  enable: true
+  stack: mixed
+unified-delay: true
 
-# مسیر فایل‌ها
-url_file = "Simple_URL_List.txt"
-template_file = "mihomo_template.txt"
-output_dir = "Sublist"
-cache_file = ".last_urls.txt"
-
-# ایجاد دایرکتوری خروجی در صورت عدم وجود
-if not os.path.exists(output_dir):
-    os.makedirs(output_dir)
-
-# خواندن URLهای قبلی از کش (در صورت وجود)
-previous = {}
-if os.path.exists(cache_file):
-    with open(cache_file, "r") as f:
-        for line in f:
-            name, old_url = line.strip().split("|", 1)
-            previous[name] = old_url
-
-new_cache = []
-changes_detected = False
-
-# خواندن URLهای جدید از فایل
-with open(url_file, "r") as f:
-    lines = [line.strip() for line in f if "|" in line]
-
-# بررسی تغییرات URLها
-for line in lines:
-    filename, new_url = line.split("|", 1)
-    old_url = previous.get(filename)
-    new_cache.append(f"{filename}|{new_url}")
-
-    if new_url != old_url:
-        changes_detected = True
-        print(f"در حال ساخت فایل جدید برای: {filename}")
-
-        # بارگذاری قالب و تغییر URL
-        with open(template_file, "r", encoding="utf-8") as tf:
-            data = yaml.safe_load(tf)
-
-        # اطمینان از وجود ساختار proxy-providers
-        if "proxy-providers" not in data or "proxy" not in data["proxy-providers"]:
-            raise Exception("ساختار proxy-providers یافت نشد!")
-
-        # تغییر URL در داده‌ها
-        data["proxy-providers"]["proxy"]["url"] = new_url
-
-        # ذخیره فایل جدید
-        with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as outf:
-            yaml.dump(data, outf, default_flow_style=False, allow_unicode=True)
-
-# ذخیره کش جدید
-with open(cache_file, "w") as f:
-    f.write("\n".join(new_cache))
-
-if not changes_detected:
-    print("✅ تغییری در URLها وجود نداشت.")
+proxy-providers:
+  proxy:
+    name: "MyProxy"
+    type: "http"
+    url: "http://default-url.com"  # اینجا URL تغییر می‌کند
+    timeout: 30
+    interval: 300
+    geoip:
+      enabled: true
+      file: "geoip.dat"
+    udp: false
+    tls:
+      enabled: false
+    remarks: "This is the default proxy provider."
