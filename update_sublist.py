@@ -65,6 +65,7 @@ def write_current_mtime(mtime_file, mtime):
 
 
 def generate_readme(output_dir, entries):
+    # Header and description
     lines = [
         "# Sublist Generator",
         "",
@@ -80,10 +81,15 @@ def generate_readme(output_dir, entries):
         "- Template: `mihomo_template.txt`",
         "- Simple URL List: `Simple_URL_List.txt`",
         "- Complex URL List: `Complex_URL_list.txt`",
-        f"- Output Directory: `{output_dir}` contains:",
+        "",
+        "## Generated Subscription Files",
+        "",
+        "| File | Link |",
+        "| ---- | ---- |",
     ]
     for filename, _ in entries:
-        lines.append(f"  - `{filename}`")
+        rel_path = os.path.join(output_dir, filename)
+        lines.append(f"| `{filename}` | [Download]({rel_path}) |")
     lines += [
         "",
         "## Requirements",
@@ -141,7 +147,7 @@ def main():
     write_current_urls(cache_file, new_cache_entries)
     write_current_mtime(mtime_file, current_mtime)
 
-    # Generate README.md
+    # Generate README.md with beautiful links
     generate_readme(output_dir, entries)
     print("📝 README.md generated")
 
