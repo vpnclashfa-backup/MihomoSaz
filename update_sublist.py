@@ -1,6 +1,6 @@
 import os
-import yaml
 import urllib.parse
+import re
 
 def load_url_list(file_path, convert_complex=False):
     entries = []
@@ -17,6 +17,10 @@ def load_url_list(file_path, convert_complex=False):
                 url = f"https://url.v1.mk/sub?&url={encoded_url}&target=clash&config=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FSleepyHeeead%2Fsubconverter-config%40master%2Fremote-config%2Funiversal%2Furltest.ini&emoji=false&append_type=true&append_info=true&scv=true&udp=true&list=true&sort=false&fdn=true&insert=false"
             entries.append((filename, url))
     return entries
+
+def replace_url_in_text(text, new_url):
+    pattern = r'(url:\s*)([^\n]+)'
+    return re.sub(pattern, rf'\1{new_url}', text, count=1)
 
 def main():
     url_file_simple = "Simple_URL_List.txt"
@@ -36,7 +40,7 @@ def main():
                 name, old_url = line.strip().split("|", 1)
                 previous[name] = old_url
 
-    # Load all new entries
+    # Load new entries
     entries = []
     entries += load_url_list(url_file_simple)
     entries += load_url_list(url_file_complex, convert_complex=True)
@@ -50,30 +54,25 @@ def main():
 
         if new_url != old_url:
             changes_detected = True
-            print(f"🛠 در حال ساخت فایل جدید برای: {filename}")
+            print(f"🛠 ساخت فایل جدید برای: {filename}")
 
-            # Load template YAML
+            # Read template as text
             with open(template_file, "r", encoding="utf-8") as tf:
-                original_content = tf.read()
-                data = yaml.safe_load(original_content)
+                original_text = tf.read()
 
-            # Update only the URL field
-            if "proxy-providers" not in data or "proxy" not in data["proxy-providers"]:
-                raise Exception("ساختار proxy-providers یافت نشد!")
+            # Replace only the URL
+            modified_text = replace_url_in_text(original_text, new_url)
 
-            data["proxy-providers"]["proxy"]["url"] = new_url
-
-            # Write updated file back
-            output_path = os.path.join(output_dir, filename)
-            with open(output_path, "w", encoding="utf-8") as outf:
-                yaml.dump(data, outf, default_flow_style=False, allow_unicode=True)
+            # Save new YAML file
+            with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as outf:
+                outf.write(modified_text)
 
     # Save updated cache
     with open(cache_file, "w", encoding="utf-8") as f:
         f.write("\n".join(new_cache))
 
     if not changes_detected:
-        print("✅ هیچ تغییری در URLها مشاهده نشد.")
+        print("✅ هیچ تغییری در URLها وجود نداشت.")
 
 if __name__ == "__main__":
     main()
