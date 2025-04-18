@@ -22,9 +22,10 @@ jobs:
           sudo apt install python3-pip -y
           pip install pyyaml
 
-      - name: اجرای اسکریپت Python
+      - name: ذخیره فایل پایتون
         run: |
-          python3 -c "
+          echo "$(
+            cat <<EOF
 import os
 import yaml
 
@@ -74,7 +75,11 @@ with open(cache_file, 'w') as f:
 
 if not changes_detected:
     print('✅ تغییری در URLها وجود نداشت.')
-          "
+EOF
+          )" > update_sublist.py
+
+      - name: اجرای اسکریپت Python
+        run: python3 update_sublist.py
 
       - name: Commit و Push در صورت وجود تغییر
         run: |
