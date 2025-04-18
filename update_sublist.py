@@ -1,20 +1,23 @@
 import os
-import yaml
+from ruamel.yaml import YAML
 
-# مسیر فایل‌ها
+# فایل‌ها
 url_file = "Simple_URL_List.txt"
 template_file = "mihomo_template.txt"
 output_dir = "Sublist"
 cache_file = ".last_urls.txt"
 
-# ایجاد دایرکتوری خروجی در صورت عدم وجود
-if not os.path.exists(output_dir):
-    os.makedirs(output_dir)
+yaml = YAML()
+yaml.preserve_quotes = True
+yaml.indent(mapping=2, sequence=4, offset=2)
 
-# خواندن URLهای قبلی از کش (در صورت وجود)
+# ساخت پوشه خروجی
+os.makedirs(output_dir, exist_ok=True)
+
+# کش قبلی
 previous = {}
 if os.path.exists(cache_file):
-    with open(cache_file, "r") as f:
+    with open(cache_file, "r", encoding="utf-8") as f:
         for line in f:
             name, old_url = line.strip().split("|", 1)
             previous[name] = old_url
@@ -22,11 +25,10 @@ if os.path.exists(cache_file):
 new_cache = []
 changes_detected = False
 
-# خواندن URLهای جدید از فایل
-with open(url_file, "r") as f:
+# خواندن URLها
+with open(url_file, "r", encoding="utf-8") as f:
     lines = [line.strip() for line in f if "|" in line]
 
-# بررسی تغییرات URLها
 for line in lines:
     filename, new_url = line.split("|", 1)
     old_url = previous.get(filename)
@@ -34,26 +36,22 @@ for line in lines:
 
     if new_url != old_url:
         changes_detected = True
-        print(f"در حال ساخت فایل جدید برای: {filename}")
+        print(f"🔄 بروزرسانی: {filename}")
 
-        # بارگذاری قالب و تغییر URL
         with open(template_file, "r", encoding="utf-8") as tf:
-            data = yaml.safe_load(tf)
+            data = yaml.load(tf)
 
-        # اطمینان از وجود ساختار proxy-providers
         if "proxy-providers" not in data or "proxy" not in data["proxy-providers"]:
-            raise Exception("ساختار proxy-providers یافت نشد!")
+            raise Exception("❌ ساختار proxy-providers.proxy پیدا نشد!")
 
-        # تغییر URL در داده‌ها
         data["proxy-providers"]["proxy"]["url"] = new_url
 
-        # ذخیره فایل جدید
         with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as outf:
-            yaml.dump(data, outf, default_flow_style=False, allow_unicode=True)
+            yaml.dump(data, outf)
 
 # ذخیره کش جدید
-with open(cache_file, "w") as f:
+with open(cache_file, "w", encoding="utf-8") as f:
     f.write("\n".join(new_cache))
 
 if not changes_detected:
-    print("✅ تغییری در URLها وجود نداشت.")
+    print("✅ تغییری وجود نداشت.")
