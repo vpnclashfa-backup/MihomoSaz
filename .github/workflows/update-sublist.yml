@@ -2,7 +2,7 @@ name: 🔄 به‌روزرسانی خودکار
 
 on:
   schedule:
-    - cron: '0 0 * * *' # هر روز ساعت ۰۰:۰۰ UTC
+    - cron: '0 0 * * *'  # هر روز ساعت ۰۰:۰۰ UTC
   workflow_dispatch:
 
 jobs:
@@ -24,8 +24,8 @@ jobs:
       - name: 💾 ذخیره تغییرات
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "🔄 به‌روزرسانی خودکار لیست‌ها"
+          commit_message: "🔄 به‌روزرسانی خودکار لیست‌ها و README"
           add: |
-            *.txt
-            Sublist/
-            .last_*
+            Sublist/*
+            README.md
+            update.log
