@@ -74,7 +74,7 @@ class ConfigProcessor:
             file_url = f"{self.base_url}{urllib.parse.quote(filename)}"
             md_content.append(f"- [{emoji} {filename}]({file_url})")
 
-        md_content([
+        md_content.extend([
             "\n## 📖 راهنمای استفاده",
             "1. روی لینک مورد نظر **کلیک راست** کنید",
             "2. گزینه **«کپی لینک»** را انتخاب کنید",
