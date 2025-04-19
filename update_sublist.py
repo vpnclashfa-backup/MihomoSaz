@@ -16,15 +16,10 @@ class ConfigProcessor:
     def __init__(self):
         self.template_path = "mihomo_template.txt"
         self.output_dir = "Sublist"
-        self.target_section = r'proxy-providers:\s*\n\s+proxy:\s*\n\s+type:\s*http\s*\n\s+url:\s*>?-?\s*\n\s+'
-
-    def _replace_proxy_url(self, template: str, new_url: str) -> str:
-        """جایگزینی دقیق URL در بخش proxy-providers با حفظ ساختار YAML"""
-        pattern = re.compile(
-            r'(proxy-providers:\s*\n\s+proxy:\s*\n\s+type:\s*http\s*\n\s+url:\s*>-?\s*\n\s+)([^\n]+)',
-            re.DOTALL
-        )
-        return pattern.sub(rf'\g<1>{new_url}', template)
+        self.readme_path = "README.md"
+        self.base_url = "https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/"
+        self.simple_list = "Simple_URL_List.txt"
+        self.complex_list = "Complex_URL_list.txt"
 
     def _process_url(self, url: str, is_complex: bool) -> str:
         """پردازش URL بر اساس نوع لیست"""
@@ -53,23 +48,57 @@ class ConfigProcessor:
                     filename, url = line.strip().split("|", 1)
                     processed_url = self._process_url(url.strip(), is_complex)
                     entries.append((filename.strip(), processed_url))
-                    logging.debug(f"بارگذاری: {filename}")
         except FileNotFoundError:
             logging.error(f"فایل {file_path} یافت نشد!")
         return entries
 
+    def _replace_proxy_url(self, template: str, new_url: str) -> str:
+        """جایگزینی URL در بخش proxy-providers"""
+        pattern = re.compile(
+            r'(proxy-providers:\s*\n\s+proxy:\s*\n\s+type:\s*http\s*\n\s+url:\s*>?-?\s*\n\s+)([^\n]+)',
+            re.DOTALL
+        )
+        return pattern.sub(rf'\g<1>{new_url}', template)
+
+    def _generate_readme(self, entries: List[Tuple[str, str]]) -> None:
+        """تولید README با لینک مستقیم"""
+        md_content = [
+            "# 📂 لیست کانفیگ‌های کلش متا",
+            "### با قوانین مخصوص ایران\n",
+            "**فایل‌های پیکربندی آماده استفاده:**\n"
+        ]
+        
+        emojis = ["🌐", "🚀", "🔒", "⚡", "🛡️"]
+        for idx, (filename, _) in enumerate(entries):
+            emoji = emojis[idx % len(emojis)]
+            file_url = f"{self.base_url}{urllib.parse.quote(filename)}"
+            md_content.append(f"- [{emoji} {filename}]({file_url})")
+
+        md_content.extend([
+            "\n**نحوه استفاده:**",
+            "1. روی لینک مورد نظر کلیک کنید",
+            "2. فایل را ذخیره کنید",
+            "3. در کلش متا import کنید\n",
+            "**مزایا:**",
+            "✅ بهینه‌شده برای ایران",
+            "✅ قوانین فیلترینگ هوشمند",
+            "✅ آپدیت روزانه"
+        ])
+
+        with open(self.readme_path, "w", encoding="utf-8") as f:
+            f.write("\n".join(md_content))
+
     def generate_configs(self):
         """تولید فایل‌های پیکربندی"""
         # بارگذاری لیست‌ها
-        simple_entries = self._load_entries("Simple_URL_List.txt", False)
-        complex_entries = self._load_entries("Complex_URL_list.txt", True)
+        simple_entries = self._load_entries(self.simple_list, False)
+        complex_entries = self._load_entries(self.complex_list, True)
         
         # ادغام با اولویت ساده
         merged = {}
         for name, url in simple_entries + complex_entries:
             if name not in merged:
                 merged[name] = url
-                logging.info(f"ثبت: {name}")
 
         # خواندن تمپلیت اصلی
         with open(self.template_path, "r", encoding="utf-8") as f:
@@ -84,8 +113,10 @@ class ConfigProcessor:
             
             with open(output_path, "w", encoding="utf-8") as f:
                 f.write(modified)
-            
-            logging.info(f"ساخته شد: {filename}")
+
+        # تولید README
+        self._generate_readme(list(merged.items()))
+        logging.info("فایل‌ها با موفقیت ساخته شدند!")
 
 if __name__ == "__main__":
     try:
