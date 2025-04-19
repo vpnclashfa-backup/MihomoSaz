@@ -1,35 +1,31 @@
-name: به‌روزرسانی خودکار لیست‌ها
+name: 🔄 به‌روزرسانی خودکار
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # هر روز ساعت ۰۰:۰۰ UTC
+    - cron: '0 0 * * *' # هر روز ساعت ۰۰:۰۰ UTC
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
-  update-lists:
+  update:
     runs-on: ubuntu-latest
 
     steps:
-      - name: کلون ریپوزیتوری
+      - name: 🛠️ کلون ریپو
         uses: actions/checkout@v3
 
-      - name: نصب پایتون و کتابخانه‌ها
+      - name: 📦 نصب پیش‌نیازها
         run: |
           python -m pip install --upgrade pip
-          pip install ruamel.yaml urllib3
+          pip install urllib3 ruamel.yaml
 
-      - name: اجرای اسکریپت پایتون
-        id: run-script
-        run: |
-          python3 update_sublist.py || exit 1
+      - name: 🚀 اجرای اسکریپت
+        run: python3 update_sublist.py
 
-      - name: کامیت و پوش تغییرات
+      - name: 💾 ذخیره تغییرات
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "🔃 به‌روزرسانی خودکار لیست‌ها و خروجی"
+          commit_message: "🔄 به‌روزرسانی خودکار لیست‌ها"
           add: |
             *.txt
             Sublist/
+            .last_*
