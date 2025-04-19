@@ -4,7 +4,6 @@ import re
 import logging
 from typing import List, Tuple
 
-# تنظیمات لاگ
 logging.basicConfig(
     filename="logfile.txt",
     level=logging.INFO,
@@ -12,141 +11,82 @@ logging.basicConfig(
     encoding="utf-8"
 )
 
-class ListProcessor:
+class URLProcessor:
     def __init__(self):
-        self.url_file_simple = "Simple_URL_List.txt"
-        self.url_file_complex = "Complex_URL_list.txt"
+        self.simple_list = "Simple_URL_List.txt"
+        self.complex_list = "Complex_URL_list.txt"
         self.template_file = "mihomo_template.txt"
         self.output_dir = "Sublist"
-        self.cache_file = ".last_urls.txt"
-        self.mtime_file = ".last_template_mtime"
 
-    def load_url_list(self, file_path: str, convert_complex: bool = False) -> List[Tuple[str, str]]:
-        """بارگذاری لیست URL‌ها با مدیریت خطا"""
-        entries = []
-        if not os.path.exists(file_path):
-            logging.error(f"فایل {file_path} یافت نشد!")
-            return entries
-
-        with open(file_path, "r", encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if not line or "|" not in line:
-                    continue
-                
-                filename, url = line.split("|", 1)
-                filename = filename.strip()
-                url = url.strip()
-
-                if convert_complex:
-                    encoded_url = urllib.parse.quote(url, safe=':/?&=')
-                    url = (
-                        "https://url.v1.mk/sub?&url="
-                        f"{encoded_url}&target=clash&config="
-                        "https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FSleepyHeeead"
-                        "%2Fsubconverter-config%40master%2Fremote-config"
-                        "%2Funiversal%2Furltest.ini&emoji=false"
-                        "&append_type=true&append_info=true&scv=true"
-                        "&udp=true&list=true&sort=false&fdn=true"
-                        "&insert=false"
-                    )
-
-                logging.debug(f"بارگذاری: {filename} ➜ {'[COMPLEX]' if convert_complex else '[SIMPLE]'}")
-                entries.append((filename, url))
+    def _process_url(self, url: str, convert: bool) -> str:
+        """تبدیل URL فقط برای لیست پیچیده"""
+        if not convert:
+            return url
         
+        encoded_url = urllib.parse.quote(url, safe=':/?&=')
+        return (
+            "https://url.v1.mk/sub?&url="
+            f"{encoded_url}&target=clash&config="
+            "https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FSleepyHeeead"
+            "%2Fsubconverter-config%40master%2Fremote-config"
+            "%2Funiversal%2Furltest.ini&emoji=false"
+            "&append_type=true&append_info=true&scv=true"
+            "&udp=true&list=true&sort=false&fdn=true"
+            "&insert=false"
+        )
+
+    def _load_entries(self, file_path: str, convert: bool) -> List[Tuple[str, str]]:
+        """بارگذاری لیست با مدیریت منحصر به فرد هر URL"""
+        entries = []
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    if "|" not in line:
+                        continue
+                    filename, url = line.strip().split("|", 1)
+                    processed_url = self._process_url(url.strip(), convert)
+                    entries.append((filename.strip(), processed_url))
+                    logging.debug(f"بارگذاری: {filename} ➜ {processed_url[:30]}...")
+        except FileNotFoundError:
+            logging.error(f"فایل {file_path} یافت نشد!")
         return entries
 
-    def process_entries(self) -> None:
-        """پردازش اصلی و مدیریت منطق برنامه"""
-        # بررسی وجود فایل‌های ضروری
-        self._check_required_files()
-
-        # بارگذاری و ادغام لیست‌ها
-        simple_entries = self.load_url_list(self.url_file_simple)
-        complex_entries = self.load_url_list(self.url_file_complex, convert_complex=True)
-        
-        # مدیریت نام‌های تکراری با اولویت ساده
-        seen = set()
-        final_entries = []
-        
-        for name, url in simple_entries + complex_entries:
-            if name in seen:
-                logging.warning(f"نام تکراری '{name}' حذف شد!")
-                continue
-            seen.add(name)
-            final_entries.append((name, url))
-
-        # بررسی تغییرات قالب
-        current_mtime = os.path.getmtime(self.template_file)
-        previous_mtime = self._read_previous_mtime()
-        template_changed = current_mtime != previous_mtime
-
-        # تولید خروجی
-        self._generate_outputs(final_entries, template_changed)
-        self._update_cache(current_mtime)
-
-    def _check_required_files(self) -> None:
-        """بررسی وجود فایل‌های ضروری"""
-        required_files = [
-            self.url_file_simple,
-            self.url_file_complex,
-            self.template_file
-        ]
-        
-        for file in required_files:
-            if not os.path.exists(file):
-                error_msg = f"فایل ضروری '{file}' وجود ندارد!"
-                logging.critical(error_msg)
-                raise FileNotFoundError(error_msg)
-
-    def _generate_outputs(self, entries: List[Tuple[str, str]], template_changed: bool) -> None:
-        """تولید فایل‌های خروجی"""
-        if not os.path.exists(self.output_dir):
-            os.makedirs(self.output_dir)
-
+    def _generate_files(self, entries: List[Tuple[str, str]]) -> None:
+        """تولید فایل‌های خروجی با URLهای منحصر به فرد"""
         with open(self.template_file, "r", encoding="utf-8") as f:
-            template_content = f.read()
+            template = f.read()
 
-        changes_detected = False
         for filename, url in entries:
             output_path = os.path.join(self.output_dir, filename)
-            
-            # جایگزینی URL در قالب
             modified_content = re.sub(
-                r'url:\s*.+',
-                f'url: {url}',
-                template_content,
-                count=1
+                r'url:\s*.+', 
+                f'url: {url}', 
+                template
             )
+            with open(output_path, "w", encoding="utf-8") as f:
+                f.write(modified_content)
+            logging.info(f"فایل {filename} با URL منحصر به فرد ساخته شد")
 
-            # ذخیره فایل در صورت نیاز
-            if template_changed or not os.path.exists(output_path):
-                with open(output_path, "w", encoding="utf-8") as f:
-                    f.write(modified_content)
-                changes_detected = True
-                logging.info(f"فایل {filename} به‌روزرسانی شد")
+    def run(self):
+        """اجرای اصلی برنامه"""
+        # ادغام لیست‌ها با اولویت ساده
+        simple_entries = self._load_entries(self.simple_list, convert=False)
+        complex_entries = self._load_entries(self.complex_list, convert=True)
+        
+        # جلوگیری از تکرار نام‌ها
+        unique_entries = {}
+        for name, url in simple_entries + complex_entries:
+            if name not in unique_entries:
+                unique_entries[name] = url
 
-        if not changes_detected:
-            logging.info("هیچ تغییری شناسایی نشد")
-
-    def _read_previous_mtime(self) -> float:
-        """خواندن زمان آخرین تغییر قالب از کش"""
-        try:
-            with open(self.mtime_file, "r", encoding="utf-8") as f:
-                return float(f.read().strip())
-        except:
-            return 0.0
-
-    def _update_cache(self, mtime: float) -> None:
-        """به‌روزرسانی اطلاعات کش"""
-        with open(self.mtime_file, "w", encoding="utf-8") as f:
-            f.write(str(mtime))
+        # تولید خروجی
+        os.makedirs(self.output_dir, exist_ok=True)
+        self._generate_files(list(unique_entries.items()))
 
 if __name__ == "__main__":
     try:
-        processor = ListProcessor()
-        processor.process_entries()
-        logging.info("پردازش با موفقیت انجام شد")
+        processor = URLProcessor()
+        processor.run()
+        logging.info("✅ پردازش موفقیت‌آمیز بود!")
     except Exception as e:
-        logging.critical(f"خطای بحرانی: {str(e)}", exc_info=True)
-        raise
+        logging.critical(f"❌ خطای بحرانی: {str(e)}", exc_info=True)
