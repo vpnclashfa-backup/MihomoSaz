@@ -1,10 +1,19 @@
 import os
 import urllib.parse
 import re
+import logging
+
+# تنظیمات لاگ
+logging.basicConfig(
+    filename="logfile.txt",  # مسیر فایل لاگ
+    level=logging.DEBUG,  # سطح لاگ
+    format="%(asctime)s - %(levelname)s - %(message)s",  # فرمت لاگ
+)
 
 def load_url_list(file_path, convert_complex=False):
     entries = []
     if not os.path.exists(file_path):
+        logging.warning(f"فایل {file_path} پیدا نشد.")
         return entries
 
     with open(file_path, "r", encoding="utf-8") as f:
@@ -24,8 +33,7 @@ def load_url_list(file_path, convert_complex=False):
                     "&udp=true&list=true&sort=false&fdn=true"
                     "&insert=false"
                 )
-            # چاپ برای دیباگ
-            print(f"🧪 {filename} ➜ {'[COMPLEX]' if convert_complex else '[SIMPLE]'} ➜ {url}")
+            logging.debug(f"{filename} ➜ {'[COMPLEX]' if convert_complex else '[SIMPLE]'} ➜ {url}")
             entries.append((filename, url))
     return entries
 
@@ -82,10 +90,10 @@ def main():
     # تشخیص اینکه آیا قالب تغییر کرده
     template_changed = (previous_mtime is None) or (current_mtime != previous_mtime)
     if template_changed:
-        print("🛠 قالب mihomo_template.txt تغییر کرده؛ بازسازی همه فایل‌ها")
+        logging.info("قالب mihomo_template.txt تغییر کرده؛ بازسازی همه فایل‌ها")
 
     # بارگذاری لیست URL‌ها
-    print("🔎 شروع بارگذاری لیست‌های URL...")
+    logging.info("شروع بارگذاری لیست‌های URL...")
     entries = []
     entries += load_url_list(url_file_simple)
     entries += load_url_list(url_file_complex, convert_complex=True)
@@ -102,7 +110,7 @@ def main():
         # اگر URL تغییر کرده یا قالب تغییر کرده، بازسازی کن
         if template_changed or (new_url != old_url):
             changes_detected = True
-            print(f"🛠 ساخت فایل جدید برای: {filename}")
+            logging.info(f"ساخت فایل جدید برای: {filename}")
 
             with open(template_file, "r", encoding="utf-8") as tf:
                 original_text = tf.read()
@@ -117,7 +125,7 @@ def main():
     write_current_mtime(mtime_file, current_mtime)
 
     if not changes_detected and not template_changed:
-        print("✅ هیچ تغییری در URL‌ها یا قالب وجود نداشت.")
+        logging.info("هیچ تغییری در URL‌ها یا قالب وجود نداشت.")
 
 if __name__ == "__main__":
     main()
