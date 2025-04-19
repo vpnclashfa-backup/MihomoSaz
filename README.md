@@ -49,13 +49,14 @@
 - [⚡ ssrsub.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/ssrsub.yaml)
 - [🛡️ ts-sf.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/ts-sf.yaml)
 - [🌐 tt.vg.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/tt.vg.yaml)
-- [🚀 10ium_V2Hub3_vmess.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/10ium_V2Hub3_vmess.yaml)
-- [🔒 10ium_V2Hub3_reality.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/10ium_V2Hub3_reality.yaml)
-- [⚡ 10ium_V2Hub3_shadowsocks.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/10ium_V2Hub3_shadowsocks.yaml)
-- [🛡️ 10ium_V2Hub3_trojan.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/10ium_V2Hub3_trojan.yaml)
-- [🌐 10ium-multi-proxy-config-fetcher.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/10ium-multi-proxy-config-fetcher.yaml)
-- [🚀 shabane.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/shabane.yaml)
-- [🔒 roosterkid.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/roosterkid.yaml)
+- [🚀 hamedp-71.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/hamedp-71.yaml)
+- [🔒 10ium_V2Hub3_vmess.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/10ium_V2Hub3_vmess.yaml)
+- [⚡ 10ium_V2Hub3_reality.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/10ium_V2Hub3_reality.yaml)
+- [🛡️ 10ium_V2Hub3_shadowsocks.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/10ium_V2Hub3_shadowsocks.yaml)
+- [🌐 10ium_V2Hub3_trojan.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/10ium_V2Hub3_trojan.yaml)
+- [🚀 10ium-multi-proxy-config-fetcher.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/10ium-multi-proxy-config-fetcher.yaml)
+- [🔒 shabane.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/shabane.yaml)
+- [⚡ roosterkid.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/roosterkid.yaml)
 
 ## 📖 راهنمای استفاده
 1. روی لینک مورد نظر **کلیک راست** کنید
@@ -64,7 +65,7 @@
 
 ## ⭐ ویژگی‌ها
 - 🚀 بهینه‌شده برای ایران
-- 🔄 فیلترینگ هوشمند
+- 🔄 فعال و غیر فعال کردن راحت قوانین
 - 📆 آپدیت روزانه
 
 ## 📥 دریافت کلاینت
