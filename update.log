@@ -111,3 +111,12 @@
 2025-04-19 01:11:21,903 - INFO - ✅ پردازش با موفقیت انجام شد!
 2025-04-19 01:22:05,608 - INFO - فایل‌ها با موفقیت ساخته شدند!
 2025-04-19 01:22:05,608 - INFO - ✅ پردازش با موفقیت انجام شد!
+2025-04-19 01:33:22,417 - CRITICAL - ❌ خطا: 'list' object is not callable
+Traceback (most recent call last):
+  File "/home/runner/work/MihomoSaz/MihomoSaz/update_sublist.py", line 132, in <module>
+    processor.generate_configs()
+  File "/home/runner/work/MihomoSaz/MihomoSaz/update_sublist.py", line 126, in generate_configs
+    self._generate_readme(list(merged.items()))
+  File "/home/runner/work/MihomoSaz/MihomoSaz/update_sublist.py", line 77, in _generate_readme
+    md_content([
+TypeError: 'list' object is not callable
