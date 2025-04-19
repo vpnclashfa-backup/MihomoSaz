@@ -25,9 +25,7 @@ jobs:
         run: python3 update_sublist.py
 
       - name: Commit و Push در صورت تغییر
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add Sublist/ .last_urls.txt || true
-          git diff --cached --quiet || git commit -m "🔁 به‌روزرسانی Sublist از Simple_URL_List.txt"
-          git push
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "اضافه کردن فایل لاگ به‌روزرسانی"
+          add: "logfile.txt"
