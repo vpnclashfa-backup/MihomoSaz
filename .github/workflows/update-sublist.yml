@@ -1,4 +1,4 @@
-name: به‌روزرسانی Sublist
+name: به‌روزرسانی خودکار لیست‌ها
 
 on:
   schedule:
@@ -9,23 +9,27 @@ permissions:
   contents: write
 
 jobs:
-  update-sublist:
+  update-lists:
     runs-on: ubuntu-latest
 
     steps:
-      - name: کلون کردن ریپو
+      - name: کلون ریپوزیتوری
         uses: actions/checkout@v3
 
-      - name: نصب پایتون و ruamel.yaml
+      - name: نصب پایتون و کتابخانه‌ها
         run: |
-          python3 -m pip install --upgrade pip
-          pip install ruamel.yaml
+          python -m pip install --upgrade pip
+          pip install ruamel.yaml urllib3
 
-      - name: اجرای اسکریپت Python
-        run: python3 update_sublist.py
+      - name: اجرای اسکریپت پایتون
+        id: run-script
+        run: |
+          python3 update_sublist.py || exit 1
 
-      - name: Commit و Push در صورت تغییر
+      - name: کامیت و پوش تغییرات
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "اضافه کردن فایل لاگ به‌روزرسانی"
-          add: "logfile.txt"
+          commit_message: "🔃 به‌روزرسانی خودکار لیست‌ها و خروجی"
+          add: |
+            *.txt
+            Sublist/
