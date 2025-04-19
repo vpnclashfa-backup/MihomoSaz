@@ -2,130 +2,113 @@ import os
 import urllib.parse
 import re
 import logging
+from typing import List, Tuple
 
 # تنظیمات لاگ
 logging.basicConfig(
-    filename="logfile.txt",  # مسیر فایل لاگ
-    level=logging.DEBUG,  # سطح لاگ
-    format="%(asctime)s - %(levelname)s - %(message)s",  # فرمت لاگ
+    filename="logfile.txt",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    encoding="utf-8"
 )
 
-def load_url_list(file_path, convert_complex=False):
-    entries = []
-    if not os.path.exists(file_path):
-        logging.warning(f"فایل {file_path} پیدا نشد.")
-        return entries
+class ListProcessor:
+    def __init__(self):
+        self.url_file_simple = "Simple_URL_List.txt"
+        self.url_file_complex = "Complex_URL_list.txt"
+        self.template_file = "mihomo_template.txt"
+        self.output_dir = "Sublist"
+        self.cache_file = ".last_urls.txt"
+        self.mtime_file = ".last_template_mtime"
 
-    with open(file_path, "r", encoding="utf-8") as f:
-        for line in f:
-            if "|" not in line:
-                continue
-            filename, url = line.strip().split("|", 1)
-            if convert_complex:
-                encoded_url = urllib.parse.quote(url, safe='')
-                url = (
-                    "https://url.v1.mk/sub?&url="
-                    f"{encoded_url}&target=clash&config="
-                    "https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FSleepyHeeead"
-                    "%2Fsubconverter-config%40master%2Fremote-config"
-                    "%2Funiversal%2Furltest.ini&emoji=false"
-                    "&append_type=true&append_info=true&scv=true"
-                    "&udp=true&list=true&sort=false&fdn=true"
-                    "&insert=false"
-                )
-            logging.debug(f"{filename} ➜ {'[COMPLEX]' if convert_complex else '[SIMPLE]'} ➜ {url}")
-            entries.append((filename, url))
-    return entries
+    def load_url_list(self, file_path: str, convert_complex: bool = False) -> List[Tuple[str, str]]:
+        entries = []
+        if not os.path.exists(file_path):
+            logging.error(f"فایل {file_path} یافت نشد!")
+            return entries
 
-def replace_url_in_text(text, new_url):
-    pattern = r'(url:\s*)([^\n]+)'
-    return re.sub(pattern, rf'\1{new_url}', text, count=1)
-
-def read_previous_urls(cache_file):
-    previous = {}
-    if os.path.exists(cache_file):
-        with open(cache_file, "r", encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8") as f:
             for line in f:
                 if "|" not in line:
                     continue
-                name, old_url = line.strip().split("|", 1)
-                previous[name] = old_url
-    return previous
+                filename, url = line.strip().split("|", 1)
+                
+                if convert_complex:
+                    encoded_url = urllib.parse.quote(url, safe=':/?&=')
+                    url = (
+                        "https://url.v1.mk/sub?&url="
+                        f"{encoded_url}&target=clash&config="
+                        "https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FSleepyHeeead"
+                        "%2Fsubconverter-config%40master%2Fremote-config"
+                        "%2Funiversal%2Furltest.ini&emoji=false"
+                        "&append_type=true&append_info=true&scv=true"
+                        "&udp=true&list=true&sort=false&fdn=true"
+                        "&insert=false"
+                    )
+                
+                entries.append((filename.strip(), url.strip()))
+                logging.debug(f"بارگذاری: {filename} ➜ {'[COMPLEX]' if convert_complex else '[SIMPLE']}")
 
-def write_current_urls(cache_file, entries):
-    with open(cache_file, "w", encoding="utf-8") as f:
-        for name, url in entries:
-            f.write(f"{name}|{url}\n")
+        return entries
 
-def read_previous_mtime(mtime_file):
-    try:
-        with open(mtime_file, "r", encoding="utf-8") as f:
-            return float(f.read().strip())
-    except:
-        return None
+    def process_entries(self) -> None:
+        # بارگذاری لیست‌ها با بررسی تکراری‌ها
+        simple_entries = self.load_url_list(self.url_file_simple)
+        complex_entries = self.load_url_list(self.url_file_complex, convert_complex=True)
+        
+        # ادغام لیست‌ها با اولویت ساده
+        seen = set()
+        final_entries = []
+        
+        for name, url in simple_entries + complex_entries:
+            if name in seen:
+                logging.warning(f"نام تکراری '{name}' نادیده گرفته شد!")
+                continue
+            seen.add(name)
+            final_entries.append((name, url))
+        
+        # پردازش تغییرات
+        template_mtime = os.path.getmtime(self.template_file)
+        previous_mtime = self._read_previous_mtime()
+        
+        if template_mtime != previous_mtime:
+            logging.info("تغییر در قالب شناسایی شد! بازسازی کامل...")
+        
+        # تولید فایل‌های خروجی
+        self._generate_outputs(final_entries, template_mtime)
 
-def write_current_mtime(mtime_file, mtime):
-    with open(mtime_file, "w", encoding="utf-8") as f:
-        f.write(str(mtime))
+    def _generate_outputs(self, entries: List[Tuple[str, str]], template_mtime: float) -> None:
+        if not os.path.exists(self.output_dir):
+            os.makedirs(self.output_dir)
+        
+        with open(self.template_file, "r", encoding="utf-8") as f:
+            template_content = f.read()
+        
+        for filename, url in entries:
+            output_path = os.path.join(self.output_dir, filename)
+            modified_content = re.sub(r'(url:\s*)(.+)', rf'\1{url}', template_content)
+            
+            with open(output_path, "w", encoding="utf-8") as f:
+                f.write(modified_content)
+        
+        self._update_cache(template_mtime)
 
-def main():
-    url_file_simple = "Simple_URL_List.txt"
-    url_file_complex = "Complex_URL_list.txt"
-    template_file = "mihomo_template.txt"
-    output_dir = "Sublist"
-    cache_file = ".last_urls.txt"
-    mtime_file = ".last_template_mtime"
+    def _read_previous_mtime(self) -> float:
+        try:
+            with open(self.mtime_file, "r", encoding="utf-8") as f:
+                return float(f.read().strip())
+        except:
+            return 0.0
 
-    # آماده‌سازی پوشه خروجی
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-
-    # بارگذاری کش قبلی URLs
-    previous_urls = read_previous_urls(cache_file)
-
-    # بارگذاری کش قبلی mtime قالب
-    previous_mtime = read_previous_mtime(mtime_file)
-    current_mtime = os.path.getmtime(template_file)
-
-    # تشخیص اینکه آیا قالب تغییر کرده
-    template_changed = (previous_mtime is None) or (current_mtime != previous_mtime)
-    if template_changed:
-        logging.info("قالب mihomo_template.txt تغییر کرده؛ بازسازی همه فایل‌ها")
-
-    # بارگذاری لیست URL‌ها
-    logging.info("شروع بارگذاری لیست‌های URL...")
-    entries = []
-    entries += load_url_list(url_file_simple)
-    entries += load_url_list(url_file_complex, convert_complex=True)
-
-    # برای ذخیره کش جدید
-    new_cache_entries = []
-    changes_detected = False
-
-    # بررسی هر URL برای تغییرات
-    for filename, new_url in entries:
-        old_url = previous_urls.get(filename)
-        new_cache_entries.append((filename, new_url))
-
-        # اگر URL تغییر کرده یا قالب تغییر کرده، بازسازی کن
-        if template_changed or (new_url != old_url):
-            changes_detected = True
-            logging.info(f"ساخت فایل جدید برای: {filename}")
-
-            with open(template_file, "r", encoding="utf-8") as tf:
-                original_text = tf.read()
-
-            modified_text = replace_url_in_text(original_text, new_url)
-
-            with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as outf:
-                outf.write(modified_text)
-
-    # به‌روزرسانی کش‌ها
-    write_current_urls(cache_file, new_cache_entries)
-    write_current_mtime(mtime_file, current_mtime)
-
-    if not changes_detected and not template_changed:
-        logging.info("هیچ تغییری در URL‌ها یا قالب وجود نداشت.")
+    def _update_cache(self, mtime: float) -> None:
+        with open(self.mtime_file, "w", encoding="utf-8") as f:
+            f.write(str(mtime))
 
 if __name__ == "__main__":
-    main()
+    try:
+        processor = ListProcessor()
+        processor.process_entries()
+        logging.info("پردازش با موفقیت انجام شد!")
+    except Exception as e:
+        logging.critical(f"خطای بحرانی: {str(e)}", exc_info=True)
+        raise
