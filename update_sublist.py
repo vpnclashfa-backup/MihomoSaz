@@ -24,6 +24,8 @@ def load_url_list(file_path, convert_complex=False):
                     "&udp=true&list=true&sort=false&fdn=true"
                     "&insert=false"
                 )
+            # چاپ برای دیباگ
+            print(f"🧪 {filename} ➜ {'[COMPLEX]' if convert_complex else '[SIMPLE]'} ➜ {url}")
             entries.append((filename, url))
     return entries
 
@@ -83,6 +85,7 @@ def main():
         print("🛠 قالب mihomo_template.txt تغییر کرده؛ بازسازی همه فایل‌ها")
 
     # بارگذاری لیست URL‌ها
+    print("🔎 شروع بارگذاری لیست‌های URL...")
     entries = []
     entries += load_url_list(url_file_simple)
     entries += load_url_list(url_file_complex, convert_complex=True)
@@ -91,6 +94,7 @@ def main():
     new_cache_entries = []
     changes_detected = False
 
+    # بررسی هر URL برای تغییرات
     for filename, new_url in entries:
         old_url = previous_urls.get(filename)
         new_cache_entries.append((filename, new_url))
@@ -108,7 +112,7 @@ def main():
             with open(os.path.join(output_dir, filename), "w", encoding="utf-8") as outf:
                 outf.write(modified_text)
 
-    # به‌روز رسانی کش‌ها
+    # به‌روزرسانی کش‌ها
     write_current_urls(cache_file, new_cache_entries)
     write_current_mtime(mtime_file, current_mtime)
 
