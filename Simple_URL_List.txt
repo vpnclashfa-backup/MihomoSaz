@@ -44,4 +44,5 @@ SnapdragonLee_clash_config_extra_US.yaml|https://raw.githubusercontent.com/Snapd
 ssrsub.yaml|https://raw.githubusercontent.com/ssrsub/ssr/refs/heads/master/Clash.yaml
 ts-sf.yaml|https://raw.githubusercontent.com/ts-sf/fly/refs/heads/main/clash
 tt.vg.yaml|https://tt.vg/freeclash
-hamedp-71.yaml|https://raw.githubusercontent.com/hamedp-71/c-1.28-2.28/refs/heads/main/hp.yaml
+hamedp-71-c-1.28-2.28.yaml|https://raw.githubusercontent.com/hamedp-71/c-1.28-2.28/refs/heads/main/hp.yaml
+hamedp-71-c-1.30-2.30.yaml|https://raw.githubusercontent.com/hamedp-71/c-1.30-2.30/refs/heads/main/hp.yaml
