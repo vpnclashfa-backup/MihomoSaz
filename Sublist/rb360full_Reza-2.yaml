@@ -31,183 +31,82 @@ dns:
   ipv6: true
   respect-rules: true
   prefer-h3: true
+  cache-algorithm: arc   
   use-host: true
   use-system-hosts: false
   enhanced-mode: fake-ip
   listen: 0.0.0.0:7874
   nameserver:
-    - 'https://dns.google/dns-query#h3=true'
-    - 'https://cloudflare-dns.com/dns-query#h3=true'
-    - 'https://dns.adguard-dns.com/dns-query#h3=true'
-    - 'https://basic.rethinkdns.com/#h3=true'    
-    - 'https://dns.nextdns.io#h3=true'
-    - https://1.1.1.1/dns-query
-    - https://dns.quad9.net/dns-query
-    - https://doh.opendns.com/dns-query
-    - https://dns.surfshark.com/dns-query
-    - https://8.8.8.8/dns-query
-    - https://9.9.9.9/dns-query
-    - https://doh.cleanbrowsing.org/doh/security-filter/
-    - https://resolver2.dns.watch/dns-query
-    - https://doh-de.blahdns.com/dns-query
-    - https://freedns.controld.com/p2
-    - https://dns.dnswarden.com/adblock
-    - https://adblock.doh.mullvad.net/dns-query
-    - tls://1.0.0.1:853
-    - tls://1.1.1.1:853
-    - tls://dns.google:853
-    - 162.159.36.1
-    - 162.159.46.1
-    - https://dns.aa.net.uk/dns-query
-    - https://xmission-slc-1.edge.nextdns.io/dns-query
-    - https://dns.controld.com/
-    - https://xtom-osa-1.edge.nextdns.io/dns-query
-    - https://ipv4-zepto-mci-1.edge.nextdns.io/dns-query
-    - https://zepto-sto-1.edge.nextdns.io
-    - https://doh.dns.sb/dns-query
-    - tls://8.8.8.8
+    - 'tcp://9.9.9.9:53'
+    - 'tcp://9.9.9.10:53'
+    - 'tcp://8.8.4.4:53'
+    - 'tcp://64.6.65.6:53'
+    - 'tcp://64.6.64.6:53'
+    - 'tcp://8.8.8.8:53'
+    - 'tcp://9.9.9.11:53'
+    - 'tcp://149.112.112.112:53'
+    - 'tls://dns.lavate.ch'
+    - 'tcp://1.0.0.1:53'
+    - 'tcp://1.1.1.1:53'
+    - 'tcp://84.200.70.40:53'
+    - 'tcp://84.200.69.80:53'   
+    - 'tls://dns.kerekes.xyz'
+  fallback:
+    - 'https://dns.tls-data.de/dns-query#h3=true'
+    - 'https://dns0.eu/dns-query#h3=true'
+    - 'https://dns.kerekes.xyz/dns-query#h3=true'
+    - 'https://abel.waringer-atg.de/dns-query#h3=true'
+    - 'https://3dns.eu/dns-query#h3=true'
+    - 'https://doh-own-recursion.nicolas-dorriere.fr/dns-query#h3=true'
+    - 'https://basic.rethinkdns.com/#h3=true'
+    - 'https://doh-random-upstream.nicolas-dorriere.fr/dns-query#h3=true'
+    - 'https://ipv4-zepto-mci-1.edge.nextdns.io/dns-query'
+    - 'https://xmission-slc-1.edge.nextdns.io/dns-query'
+    - 'https://dns.smartguard.io/dns-query#h3=true'
+  fallback-filter:
+    geoip: true
+    geoip-code: IR
   proxy-server-nameserver:
-    - 'https://dns.google/dns-query#h3=true'
-    - 'https://cloudflare-dns.com/dns-query#h3=true'
-    - 'https://dns.adguard-dns.com/dns-query#h3=true'
-    - 'https://basic.rethinkdns.com/#h3=true'    
-    - 'https://dns.nextdns.io#h3=true'
-    - https://1.1.1.1/dns-query
-    - https://dns.quad9.net/dns-query
-    - https://doh.opendns.com/dns-query
-    - https://dns.surfshark.com/dns-query
-    - https://8.8.8.8/dns-query
-    - https://9.9.9.9/dns-query
-    - https://doh.cleanbrowsing.org/doh/security-filter/
-    - https://resolver2.dns.watch/dns-query
-    - https://doh-de.blahdns.com/dns-query
-    - https://freedns.controld.com/p2
-    - https://dns.dnswarden.com/adblock
-    - https://adblock.doh.mullvad.net/dns-query
-    - tls://1.0.0.1:853
-    - tls://1.1.1.1:853
-    - tls://dns.google:853
-    - 162.159.36.1
-    - 162.159.46.1
-    - https://dns.aa.net.uk/dns-query
-    - https://xmission-slc-1.edge.nextdns.io/dns-query
-    - https://dns.controld.com/
-    - https://xtom-osa-1.edge.nextdns.io/dns-query
-    - https://ipv4-zepto-mci-1.edge.nextdns.io/dns-query
-    - https://zepto-sto-1.edge.nextdns.io
-    - https://doh.dns.sb/dns-query
-    - tls://8.8.8.8
+    - 'https://dns.tls-data.de/dns-query#h3=true'
+    - 'https://dns0.eu/dns-query#h3=true'
+    - 'https://dns.kerekes.xyz/dns-query#h3=true'
+    - 'https://abel.waringer-atg.de/dns-query#h3=true'
+    - 'https://3dns.eu/dns-query#h3=true'
+    - 'https://doh-own-recursion.nicolas-dorriere.fr/dns-query#h3=true'
+    - 'https://basic.rethinkdns.com/#h3=true'
+    - 'https://doh-random-upstream.nicolas-dorriere.fr/dns-query#h3=true'
+    - 'https://ipv4-zepto-mci-1.edge.nextdns.io/dns-query'
+    - 'https://xmission-slc-1.edge.nextdns.io/dns-query'
+    - 'https://dns.smartguard.io/dns-query#h3=true'
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
-    - '*.lan'
-    - '*.localdomain'
-    - '*.example'
-    - '*.invalid'
-    - '*.localhost'
-    - '*.test'
-    - '*.local'
+    - '*.lan'             
+    - '*.localdomain'     
+    - '*.invalid'         
+    - '*.localhost'       
+    - '*.test'            
+    - '*.local'           
     - '*.home.arpa'
-    - time.*.com
-    - time.*.gov
-    - time.*.edu.cn
-    - time.*.apple.com
-    - time1.*.com
-    - time2.*.com
-    - time3.*.com
-    - time4.*.com
-    - time5.*.com
-    - time6.*.com
-    - time7.*.com
-    - ntp.*.com
-    - ntp1.*.com
-    - ntp2.*.com
-    - ntp3.*.com
-    - ntp4.*.com
-    - ntp5.*.com
-    - ntp6.*.com
-    - ntp7.*.com
-    - '*.time.edu.cn'
-    - '*.ntp.org.cn'
-    - +.pool.ntp.org
-    - time1.cloud.tencent.com
-    - music.163.com
-    - '*.music.163.com'
-    - '*.126.net'
-    - musicapi.taihe.com
-    - music.taihe.com
-    - songsearch.kugou.com
-    - trackercdn.kugou.com
-    - '*.kuwo.cn'
-    - api-jooxtt.sanook.com
-    - api.joox.com
-    - joox.com
-    - y.qq.com
-    - '*.y.qq.com'
-    - streamoc.music.tc.qq.com
-    - mobileoc.music.tc.qq.com
-    - isure.stream.qqmusic.qq.com
-    - dl.stream.qqmusic.qq.com
-    - aqqmusic.tc.qq.com
-    - amobile.music.tc.qq.com
-    - '*.xiami.com'
-    - '*.music.migu.cn'
-    - music.migu.cn
-    - '*.msftconnecttest.com'
-    - '*.msftncsi.com'
-    - msftconnecttest.com
-    - msftncsi.com
-    - localhost.ptlogin2.qq.com
-    - localhost.sec.qq.com
-    - +.srv.nintendo.net
-    - +.stun.playstation.net
-    - xbox.*.microsoft.com
-    - xnotify.xboxlive.com
-    - +.battlenet.com.cn
-    - +.wotgame.cn
-    - +.wggames.cn
-    - +.wowsgame.cn
-    - +.wargaming.net
-    - proxy.golang.org
-    - stun.*.*
-    - stun.*.*.*
-    - +.stun.*.*
-    - +.stun.*.*.*
-    - +.stun.*.*.*.*
-    - heartbeat.belkin.com
-    - '*.linksys.com'
-    - '*.linksyssmartwifi.com'
-    - '*.router.asus.com'
-    - mesu.apple.com
-    - swscan.apple.com
-    - swquery.apple.com
-    - swdownload.apple.com
-    - swcdn.apple.com
-    - swdist.apple.com
-    - lens.l.google.com
-    - stun.l.google.com
-    - +.nflxvideo.net
-    - '*.square-enix.com'
-    - '*.finalfantasyxiv.com'
-    - '*.ffxiv.com'
-    - '*.mcdn.bilivideo.cn'
-    - +.media.dssott.com
-    - "connect.rom.miui.com"
-    - "*.miwifi.com"
-    - "*.ntp.org"
-    - "*.u-tools.cn"
-    - "*.mediatek.com"
-    - "*.cfprefer1.xyz"
-    - "*.wetab.link"
-    - "*.tyasaka.xyz"
-    - "localhost.ptlogin2.qq.com"
-    - "localhost.sec.qq.com"
-    - "localhost.work.weixin.qq.com"
-    - "*.weixin.qq.com"
-    - "*.wechat.com"
-    - "time.windows.com"
-    - "*.wpsmail.net"
-    - "*.henzanapp.com"
-    - "*.pconline.com.cn"
+    - 'time.*.com'        
+    - 'ntp.*.com'        
+    - '+.pool.ntp.org'    
+    - 'time.windows.com'  
+    - '*.msftconnecttest.com' 
+    - '*.msftncsi.com'        
+    - 'msftconnecttest.com'   
+    - 'msftncsi.com'          
+    - 'mesu.apple.com'       
+    - 'swscan.apple.com'     
+    - 'swdownload.apple.com' 
+    - 'swcdn.apple.com'      
+    - 'stun.l.google.com'   
+    - 'lens.l.google.com'   
+    - '+.stun.*.*'         
+    - '+.srv.nintendo.net'    
+    - '+.stun.playstation.net' 
+    - 'xbox.*.microsoft.com'   
+    - 'proxy.golang.org'     
+    - '*.ir'  
 
 sniffer:
   enable: true
@@ -250,66 +149,18 @@ rule-providers:
     url: "https://github.com/MasterKia/iran-hosted-domains/releases/latest/download/clash_rules_ads.yaml"
     path: ./ruleset/PersianBlocker.yaml
     interval: 86400
-  category_porn:
-    type: http
-    behavior: domain
-    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/category-porn.yaml
-    interval: 86400
-    path: ./ruleset/category_porn.yaml
-  facebook:
-    type: http
-    behavior: domain
-    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/facebook.yaml
-    interval: 86400
-    path: ./ruleset/facebook.yaml
   youtube:
     type: http
     behavior: domain
     url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/youtube.yaml
     interval: 86400
     path: ./ruleset/youtube.yaml
-  instagram:
-    type: http
-    behavior: domain
-    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/instagram.yaml
-    interval: 86400
-    path: ./ruleset/instagram.yaml
-  spotify:
-    type: http
-    behavior: domain
-    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/spotify.yaml
-    interval: 86400
-    path: ./ruleset/spotify.yaml
-  twitter:
-    type: http
-    behavior: domain
-    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/twitter.yaml
-    interval: 86400
-    path: ./ruleset/twitter.yaml
   telegram:
     type: http
     behavior: domain
     url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/telegram.yaml
     interval: 86400
     path: ./ruleset/telegram.yaml
-  openai:
-    type: http
-    behavior: domain
-    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/openai.yaml
-    interval: 86400
-    path: ./ruleset/openai.yaml
-  whatsapp:
-    type: http
-    behavior: domain
-    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/whatsapp.yaml
-    interval: 86400
-    path: ./ruleset/whatsapp.yaml
-  tiktok:
-    type: http
-    behavior: domain
-    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/tiktok.yaml
-    interval: 86400
-    path: ./ruleset/tiktok.yaml
   twitch:
     type: http
     behavior: domain
@@ -364,12 +215,6 @@ rule-providers:
     url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/refs/heads/generated/category-games.yaml
     interval: 86400
     path: ./ruleset/category-games.yaml
-  tahrim:
-    type: http
-    behavior: classical
-    url: https://raw.githubusercontent.com/coldwater-10/clash_rules/main/tahrim.yaml
-    interval: 86400
-    path: ./ruleset/tahrim.yaml
   ir:
     type: http
     format: yaml
@@ -456,12 +301,6 @@ rule-providers:
     url: https://raw.githubusercontent.com/10ium/mihomo_rule/refs/heads/main/list/BanEasyList.yaml
     interval: 86400
     path: ./ruleset/BanEasyList.yaml
-  Apple:
-    type: http
-    behavior: classical
-    url: https://raw.githubusercontent.com/10ium/mihomo_rule/refs/heads/main/list/Apple.yaml
-    interval: 86400
-    path: ./ruleset/Apple.yaml
   Download:
     type: http
     behavior: classical
@@ -474,18 +313,6 @@ rule-providers:
     url: https://raw.githubusercontent.com/10ium/mihomo_rule/refs/heads/main/list/GameDownload.yaml
     interval: 86400
     path: ./ruleset/GameDownload.yaml
-  Gemini:
-    type: http
-    behavior: classical
-    url: https://raw.githubusercontent.com/10ium/mihomo_rule/refs/heads/main/list/Gemini.yaml
-    interval: 86400
-    path: ./ruleset/Gemini.yaml
-  ProxyMedia:
-    type: http
-    behavior: classical
-    url: https://raw.githubusercontent.com/10ium/mihomo_rule/refs/heads/main/list/ProxyMedia.yaml
-    interval: 86400
-    path: ./ruleset/ProxyMedia.yaml
   SteamRegionCheck:
     type: http
     behavior: classical
@@ -554,6 +381,24 @@ rule-providers:
     url: "https://raw.githubusercontent.com/coldwater-10/clash_rules/refs/heads/main/xiaomi_white_list.yaml"
     path: ./ruleset/xiaomi_white_list.yaml
     interval: 86400
+  cloudflare:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/refs/heads/generated/cloudflare.yaml
+    interval: 86400
+    path: ./ruleset/cloudflare.yaml
+  github:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/refs/heads/generated/github.yaml
+    interval: 86400
+    path: ./ruleset/xgithub.yaml
+  whatsapp:
+    type: http
+    behavior: domain
+    url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/generated/whatsapp.yaml
+    interval: 86400
+    path: ./ruleset/whatsapp.yaml
 
 proxy-groups:
   - name: 🔀 نوع انتخاب پروکسی
@@ -639,6 +484,12 @@ proxy-groups:
       - 🛡️ بدون فیلترشکن
       - 🚫 اجازه ندادن
       - 🔀 نوع انتخاب پروکسی
+  - name: 🟢 واتس آپ
+    type: select
+    proxies:
+      - 🛡️ بدون فیلترشکن
+      - 🚫 اجازه ندادن
+      - 🔀 نوع انتخاب پروکسی
   - name: 🆎 تبلیغات
     type: select
     proxies:
@@ -682,6 +533,18 @@ proxy-groups:
       - 🛡️ بدون فیلترشکن
       - 🚫 اجازه ندادن
   - name: 🇮🇷 سایتای ایرانی
+    type: select
+    proxies:
+      - 🛡️ بدون فیلترشکن
+      - 🚫 اجازه ندادن
+      - 🔀 نوع انتخاب پروکسی
+  - name: ☁️ کلودفلر
+    type: select
+    proxies:
+      - 🛡️ بدون فیلترشکن
+      - 🚫 اجازه ندادن
+      - 🔀 نوع انتخاب پروکسی
+  - name: 🐙 GitHub
     type: select
     proxies:
       - 🛡️ بدون فیلترشکن
@@ -754,6 +617,7 @@ rules:
   - PROCESS-NAME,org.telegram.messenger,💬 تلگرام
   - RULE-SET,telegram,💬 تلگرام
   - RULE-SET,YouTube,▶️ یوتیوب
+  - RULE-SET,youtube,▶️ یوتیوب
   - RULE-SET,YouTubeMusic,▶️ یوتیوب
   - RULE-SET,censor,🤬 سایتای سانسوری
   - RULE-SET,ircidr,🇮🇷 سایتای ایرانی
@@ -762,6 +626,7 @@ rules:
   - RULE-SET,iran,🇮🇷 سایتای ایرانی
   - RULE-SET,ir,🇮🇷 سایتای ایرانی
   - RULE-SET,apps,🇮🇷 سایتای ایرانی
+  - RULE-SET,whatsapp,🟢 واتس آپ
   - RULE-SET,steam,🖥️ استیم
   - RULE-SET,SteamRegionCheck,🖥️ استیم
   - RULE-SET,game,🎮 گیم
@@ -771,20 +636,8 @@ rules:
   - RULE-SET,xiaomi_white_list,🔀 نوع انتخاب پروکسی
   - RULE-SET,xiaomi-ads,🍃 تبلیغات اپ ها
   - RULE-SET,xiaomi_block_list,🍃 تبلیغات اپ ها
-  - RULE-SET,tahrim,🏴‍☠️ سایتای تحریمی
-  - RULE-SET,Apple,🏴‍☠️ سایتای تحریمی
-  - RULE-SET,openai,🏴‍☠️ سایتای تحریمی
-  - RULE-SET,Gemini,🏴‍☠️ سایتای تحریمی
-  - RULE-SET,category_porn,🔀 نوع انتخاب پروکسی
-  - RULE-SET,facebook,🔀 نوع انتخاب پروکسی
-  - RULE-SET,youtube,🔀 نوع انتخاب پروکسی
-  - RULE-SET,instagram,🔀 نوع انتخاب پروکسی
-  - RULE-SET,spotify,🔀 نوع انتخاب پروکسی
-  - RULE-SET,twitter,🔀 نوع انتخاب پروکسی
-  - RULE-SET,whatsapp,🔀 نوع انتخاب پروکسی
-  - RULE-SET,tiktok,🔀 نوع انتخاب پروکسی
-  - RULE-SET,ProxyMedia,🔀 نوع انتخاب پروکسی
-  - IP-CIDR,10.10.34.0/24,🔀 نوع انتخاب پروکسی
+  - RULE-SET,cloudflare,☁️ کلودفلر
+  - RULE-SET,github,🐙 GitHub
   - RULE-SET,google-play,🔀 نوع انتخاب پروکسی
   - RULE-SET,google,🌍 گوگل
   - RULE-SET,local_ips,🛡️ بدون فیلترشکن
