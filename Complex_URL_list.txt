@@ -63,3 +63,5 @@ sDTz6J.absslk.xyz.yaml|https://sDTz6J.absslk.xyz/3e1fc97dfeebc0778a6176c1742d06d
 joYAQx.mcsslk.xyz.yaml|https://joYAQx.mcsslk.xyz/62e8b56aa7f98dcfb44c5a77291ab2ff
 muma16fx.netlify.app.yaml|https://muma16fx.netlify.app
 qiaomenzhuanfx.netlify.app.yaml|https://qiaomenzhuanfx.netlify.app
+hamedp-71hp.yaml|https://raw.githubusercontent.com/10ium/base64-encoder/main/encoded/hamedp-71_hp.txt
+hamedp-71_openproxylist.yaml|https://raw.githubusercontent.com/hamedp-71/openproxylist/refs/heads/main/V2RAY_BASE64.txt
