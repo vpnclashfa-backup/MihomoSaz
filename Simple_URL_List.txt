@@ -1,13 +1,10 @@
 66.42.50.118.yaml|http://66.42.50.118:12580/clash/proxies
-aiboboxx.yaml|https://raw.githubusercontent.com/aiboboxx/clashfree/refs/heads/main/clash.yml
-Alvin9999.yaml|https://raw.githubusercontent.com/Alvin9999/pac2/refs/heads/master/clash.meta2/15/config.yaml
 anaer.yaml|https://raw.githubusercontent.com/anaer/Sub/refs/heads/main/clash.yaml
 Barabama.clashmeta.yaml|https://raw.githubusercontent.com/Barabama/FreeNodes/refs/heads/main/nodes/clashmeta.yaml
 Barabama.ndnode.yaml|https://raw.githubusercontent.com/Barabama/FreeNodes/refs/heads/main/nodes/ndnode.yaml
 Barabama.nodefree.yaml|https://raw.githubusercontent.com/Barabama/FreeNodes/refs/heads/main/nodes/nodefree.yaml
 Barabama.v2rayshare.yaml|https://raw.githubusercontent.com/Barabama/FreeNodes/refs/heads/main/nodes/v2rayshare.yaml
 clashe.eu.org.yaml|https://clashe.eu.org/clash/proxies
-crazygeeky.yaml|https://proxy.crazygeeky.com/clash/proxies
 ermaozi.yaml|https://raw.githubusercontent.com/ermaozi/get_subscribe/refs/heads/main/subscribe/clash.yml
 firefoxmmx2.yaml|https://raw.githubusercontent.com/firefoxmmx2/v2rayshare_subcription/main/subscription/clash_sub.yaml
 free18.yaml|https://raw.githubusercontent.com/free18/v2ray/refs/heads/main/c.yaml
@@ -28,7 +25,6 @@ MrMohebi_under_1500ms.yaml|https://raw.githubusercontent.com/MrMohebi/xray-proxy
 peasoft.list.meta.yaml|https://raw.githubusercontent.com/peasoft/NoMoreWalls/refs/heads/master/list.meta.yml
 peasoft.list.yaml|https://raw.githubusercontent.com/peasoft/NoMoreWalls/refs/heads/master/list.yml
 proxypool.link.yaml|https://proxypool.link/clash/proxies
-proxypool1999.yaml|https://proxypool1999.banyunxiaoxi.icu/clash/proxies
 pxypool.131433.yaml|https://pxypool.131433.xyz/clash/proxies
 ripaojiedian.yaml|https://raw.githubusercontent.com/ripaojiedian/freenode/refs/heads/main/clash
 ronghuaxueleng.cfmem.yaml|https://raw.githubusercontent.com/ronghuaxueleng/get_v2/refs/heads/main/pub/cfmem.yaml
@@ -38,10 +34,7 @@ ronghuaxueleng.pawdroid.yaml|https://raw.githubusercontent.com/ronghuaxueleng/ge
 Ruk1ng001.yaml|https://raw.githubusercontent.com/Ruk1ng001/freeSub/refs/heads/main/clash.yaml
 snakem982-clash-meta.yaml|https://raw.githubusercontent.com/snakem982/proxypool/refs/heads/main/source/clash-meta.yaml
 snakem982-clash-meta-2.yaml|https://raw.githubusercontent.com/snakem982/proxypool/refs/heads/main/source/clash-meta-2.yaml
-SnapdragonLee_clash_config.yaml|https://raw.githubusercontent.com/SnapdragonLee/SystemProxy/refs/heads/master/dist/clash_config.yaml
-SnapdragonLee_clash_config_extra.yaml|https://raw.githubusercontent.com/SnapdragonLee/SystemProxy/refs/heads/master/dist/clash_config_extra.yaml
 SnapdragonLee_clash_config_extra_US.yaml|https://raw.githubusercontent.com/SnapdragonLee/SystemProxy/refs/heads/master/dist/clash_config_extra_US.yaml
-ssrsub.yaml|https://raw.githubusercontent.com/ssrsub/ssr/refs/heads/master/Clash.yaml
 ts-sf.yaml|https://raw.githubusercontent.com/ts-sf/fly/refs/heads/main/clash
 tt.vg.yaml|https://tt.vg/freeclash
 hamedp-71-c-1.28-2.28.yaml|https://raw.githubusercontent.com/hamedp-71/c-1.28-2.28/refs/heads/main/hp.yaml
