@@ -107,6 +107,7 @@
 - [🚀 qiaomenzhuanfx.netlify.app.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/qiaomenzhuanfx.netlify.app.yaml)
 - [🔒 hamedp-71hp.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/hamedp-71hp.yaml)
 - [⚡ hamedp-71_openproxylist.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/hamedp-71_openproxylist.yaml)
+- [🛡️ An0nymousTeam.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/An0nymousTeam.yaml)
 
 ## 📖 راهنمای استفاده
 1. روی لینک مورد نظر **کلیک راست** کنید
