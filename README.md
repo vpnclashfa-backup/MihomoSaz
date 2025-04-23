@@ -112,7 +112,21 @@
 - [🚀 qiaomenzhuanfx.netlify.app.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/qiaomenzhuanfx.netlify.app.yaml)
 - [🔒 hamedp-71hp.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/hamedp-71hp.yaml)
 - [⚡ hamedp-71_openproxylist.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/hamedp-71_openproxylist.yaml)
-- [🛡️ An0nymousTeam.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/An0nymousTeam.yaml)
+- [🛡️ @An0nymousTeam.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/%40An0nymousTeam.yaml)
+- [🌐 @DarkVPNpro2.txt.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/%40DarkVPNpro2.txt.yaml)
+- [🚀 @FREE2CONFIG_Vless.txt.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/%40FREE2CONFIG_Vless.txt.yaml)
+- [🔒 @proxy_kafee.txt.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/%40proxy_kafee.txt.yaml)
+- [⚡ @v2ray_hidify.txt.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/%40v2ray_hidify.txt.yaml)
+- [🛡️ Mosifree_RealityMosifree_Reality.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/Mosifree_RealityMosifree_Reality.yaml)
+- [🌐 Mosifree_SS.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/Mosifree_SS.yaml)
+- [🚀 Mosifree_T%252CH.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/Mosifree_T%25252CH.yaml)
+- [🔒 Mosifree_Vless.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/Mosifree_Vless.yaml)
+- [⚡ Mosifree_Vmess.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/Mosifree_Vmess.yaml)
+- [🛡️ ShadowsocksM-MCI-Wifi.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/ShadowsocksM-MCI-Wifi.yaml)
+- [🌐 amirparsaxs@xsfilternet.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/amirparsaxs%40xsfilternet.yaml)
+- [🚀 @v2raybluecrystal.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/%40v2raybluecrystal.yaml)
+- [🔒 @redfree8.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/%40redfree8.yaml)
+- [⚡ YuanZhang.v2ray.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/YuanZhang.v2ray.yaml)
 
 ## 📖 راهنمای استفاده
 1. روی لینک مورد نظر **کلیک راست** کنید
