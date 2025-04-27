@@ -76,3 +76,5 @@ amirparsaxs@xsfilternet.yaml|https://raw.githubusercontent.com/10ium/base64-enco
 @v2raybluecrystal.yaml|https://p5.punchline.ir:2096/v2raybluecrystal/v2raybluecrystal-4000
 @redfree8.yaml|https://shadowmere.xyz/api/b64sub/#@redfree8
 YuanZhang.v2ray.yaml|https://sub.vip.sd/JPa6vvFgygVtNP2sGJ2r/download/YuanZhang?target=v2ray 
+vpnhat.62be89e4bc828cdfd0c62bfb44746312.yaml|https://www.flyintpro05.com/api/v1/client/subscribe?token=62be89e4bc828cdfd0c62bfb44746312
+freedomnet25500_free.yaml|https://raw.githubusercontent.com/10ium/base64-encoder/refs/heads/main/encoded/freedomnet25500_free
