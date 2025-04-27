@@ -32,3 +32,11 @@
 2025-04-27 13:33:48,979 - INFO - ✅ پردازش با موفقیت انجام شد!
 2025-04-27 13:36:38,902 - INFO - فایل‌ها با موفقیت ساخته شدند!
 2025-04-27 13:36:38,902 - INFO - ✅ پردازش با موفقیت انجام شد!
+2025-04-27 13:44:37,626 - CRITICAL - ❌ خطا: [Errno 2] No such file or directory: 'Sublist/hamedp-71/c-2.7-3.7.yaml'
+Traceback (most recent call last):
+  File "/home/runner/work/MihomoSaz/MihomoSaz/update_sublist.py", line 132, in <module>
+    processor.generate_configs()
+  File "/home/runner/work/MihomoSaz/MihomoSaz/update_sublist.py", line 122, in generate_configs
+    with open(output_path, "w", encoding="utf-8") as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'Sublist/hamedp-71/c-2.7-3.7.yaml'
