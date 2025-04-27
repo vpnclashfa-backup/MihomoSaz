@@ -127,8 +127,7 @@
 - [🚀 @v2raybluecrystal.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/%40v2raybluecrystal.yaml)
 - [🔒 @redfree8.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/%40redfree8.yaml)
 - [⚡ YuanZhang.v2ray.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/YuanZhang.v2ray.yaml)
-- [🛡️ vpnhat.62be89e4bc828cdfd0c62bfb44746312.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/vpnhat.62be89e4bc828cdfd0c62bfb44746312.yaml)
-- [🌐 freedomnet25500_free.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/freedomnet25500_free.yaml)
+- [🛡️ freedomnet25500_free.yaml](https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/freedomnet25500_free.yaml)
 
 ## 📖 راهنمای استفاده
 1. روی لینک مورد نظر **کلیک راست** کنید
