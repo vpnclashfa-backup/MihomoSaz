@@ -441,6 +441,7 @@ rule-providers:
 
 proxy-groups:
   - name: 🔀 نوع انتخاب پروکسی
+    icon: https://www.svgrepo.com/show/412721/choose.svg
     type: select
     proxies:
       - اتصال پایدار 🔗
@@ -454,10 +455,12 @@ proxy-groups:
       - 🛡️ بدون فیلترشکن
   - name: دستی 🤏🏻
     type: select
+    icon: https://www.svgrepo.com/show/372331/cursor-hand-click.svg
     use:
       - proxy
   - name: خودکار (بهترین پینگ) 🤖
     type: url-test
+    icon: https://www.svgrepo.com/show/7876/speedometer.svg
     url: https://api.v2fly.org/checkConnection.svgz
     interval: 600
     timeout: 6000
@@ -469,6 +472,7 @@ proxy-groups:
       - proxy
   - name: پشتیبان (در صورت قطعی) 🧯
     type: fallback
+    icon: https://www.svgrepo.com/show/415208/backup-cloud-document.svg
     url: https://www.gstatic.com/generate_204
     interval: 600
     timeout: 6000
@@ -479,6 +483,7 @@ proxy-groups:
       - proxy
   - name: اتصال پایدار 🔗
     type: url-test
+    icon: https://www.svgrepo.com/show/428774/connection-internet-communication.svg
     url: https://cp.cloudflare.com/generate_204
     interval: 30
     timeout: 3000
@@ -491,6 +496,7 @@ proxy-groups:
       - دستی 🤏🏻
   - name: توزیع بار (پایدار) 🧲
     type: load-balance
+    icon: https://www.svgrepo.com/show/331731/load-balancer-generic.svg
     url: https://api.v2fly.org/checkConnection.svgz
     strategy: consistent-hashing
     interval: 600
@@ -501,6 +507,7 @@ proxy-groups:
       - proxy
   - name: توزیع بار (گردشی) 🔁
     type: load-balance
+    icon: https://www.svgrepo.com/show/388466/rotating-forward.svg
     url: https://api.v2fly.org/checkConnection.svgz
     strategy: round-robin
     interval: 600
@@ -512,6 +519,7 @@ proxy-groups:
       - proxy
   - name: توزیع بار (موقت) ⏳
     type: load-balance
+    icon: https://www.svgrepo.com/show/323449/temporary-shield.svg
     url: https://api.v2fly.org/checkConnection.svgz
     strategy: sticky-sessions
     interval: 600
@@ -522,6 +530,7 @@ proxy-groups:
       - proxy
   - name: 📥 دانلود منیجر
     type: select
+    icon: https://www.svgrepo.com/show/504072/advanced-download-manager.svg
     proxies:
       - 🛡️ بدون فیلترشکن
       - 🔀 نوع انتخاب پروکسی
@@ -532,6 +541,7 @@ proxy-groups:
       - 🚫 اجازه ندادن
   - name: 💬 تلگرام
     type: select
+    icon: https://www.svgrepo.com/show/354443/telegram.svg
     proxies:
       - 🔀 نوع انتخاب پروکسی
       - 🛡️ بدون فیلترشکن
@@ -542,6 +552,7 @@ proxy-groups:
       - 🚫 اجازه ندادن
   - name: ▶️ یوتیوب
     type: select
+    icon: https://www.svgrepo.com/show/475700/youtube-color.svg
     proxies:
       - 🔀 نوع انتخاب پروکسی
       - 🛡️ بدون فیلترشکن
@@ -552,6 +563,7 @@ proxy-groups:
       - 🚫 اجازه ندادن
   - name: 🌍 گوگل
     type: select
+    icon: https://www.svgrepo.com/show/475656/google-color.svg
     proxies:
       - 🛡️ بدون فیلترشکن
       - 🚫 اجازه ندادن
@@ -562,6 +574,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: 🟢 واتس آپ
     type: select
+    icon: https://www.svgrepo.com/show/452133/whatsapp.svg
     proxies:
       - 🛡️ بدون فیلترشکن
       - 🚫 اجازه ندادن
@@ -572,6 +585,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: 🤖 هوش مصنوعی
     type: select
+    icon: https://www.svgrepo.com/show/306500/openai.svg
     proxies:
       - 🔀 نوع انتخاب پروکسی
       - 🛡️ بدون فیلترشکن
@@ -582,6 +596,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: 📸 اینستاگرام
     type: select
+    icon: https://www.svgrepo.com/show/452229/instagram-1.svg
     proxies:
       - 🔀 نوع انتخاب پروکسی
       - 🛡️ بدون فیلترشکن
@@ -592,6 +607,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: 🆎 تبلیغات
     type: select
+    icon: https://www.svgrepo.com/show/336358/ad.svg
     proxies:
       - 🚫 اجازه ندادن
       - 🛡️ بدون فیلترشکن
@@ -602,6 +618,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: 🍃 تبلیغات اپ ها
     type: select
+    icon: https://www.svgrepo.com/show/12172/smartphone-ad.svg
     proxies:
       - 🚫 اجازه ندادن
       - 🛡️ بدون فیلترشکن
@@ -612,6 +629,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: 🛑 رهگیری جهانی
     type: select
+    icon: https://www.svgrepo.com/show/298725/tracking-track.svg
     proxies:
       - 🚫 اجازه ندادن
       - 🛡️ بدون فیلترشکن
@@ -622,6 +640,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: ⚠️ سایتای مخرب
     type: select
+    icon: https://www.svgrepo.com/show/381135/cyber-crime-cyber-phishing-fraud-hack-money.svg
     proxies:
       - 🚫 اجازه ندادن
       - 🔀 نوع انتخاب پروکسی
@@ -632,6 +651,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: 🖥️ استیم
     type: select
+    icon: https://www.svgrepo.com/show/452107/steam.svg
     proxies:
       - 🛡️ بدون فیلترشکن
       - 🚫 اجازه ندادن
@@ -642,6 +662,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: 🎮 گیم
     type: select
+    icon: https://www.svgrepo.com/show/167729/game-controller.svg
     proxies:
       - 🔀 نوع انتخاب پروکسی
       - 🛡️ بدون فیلترشکن
@@ -652,6 +673,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: 📡 توییچ
     type: select
+    icon: https://www.svgrepo.com/show/343527/twitch-network-communication-interaction-connection.svg
     proxies:
       - 🔀 نوع انتخاب پروکسی
       - 🛡️ بدون فیلترشکن
@@ -662,6 +684,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: 🇮🇷 سایتای ایرانی
     type: select
+    icon: https://upload.wikimedia.org/wikipedia/commons/3/36/Flag_of_Iran_%28civil%29.svg
     proxies:
       - 🛡️ بدون فیلترشکن
       - 🚫 اجازه ندادن
@@ -672,6 +695,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: ☁️ کلودفلر
     type: select
+    icon: https://www.svgrepo.com/show/353564/cloudflare.svg
     proxies:
       - 🛡️ بدون فیلترشکن
       - 🚫 اجازه ندادن
@@ -682,6 +706,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: 🐙 گیتهاب
     type: select
+    icon: https://www.svgrepo.com/show/355033/github.svg
     proxies:
       - 🛡️ بدون فیلترشکن
       - 🚫 اجازه ندادن
@@ -692,6 +717,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: 🗣️ دیسکورد
     type: select
+    icon: https://www.svgrepo.com/show/343548/discord-communication-interaction-message-network.svg
     proxies:
       - 🔀 نوع انتخاب پروکسی
       - 🛡️ بدون فیلترشکن
@@ -702,6 +728,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: 🤬 سایتای سانسوری
     type: select
+    icon: https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Censorship.svg/300px-Censorship.svg.png
     proxies:
       - 🚫 اجازه ندادن
       - 🔀 نوع انتخاب پروکسی
@@ -712,24 +739,23 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: 🛡️ بدون فیلترشکن
     type: select
+    icon: https://www.svgrepo.com/show/6318/connection.svg
     proxies:
       - DIRECT
     hidden: true
   - name: ⛔ قطع اینترنت
     type: select
+    icon: https://www.svgrepo.com/show/305372/wifi-off.svg
     proxies:
       - REJECT
     hidden: true
   - name: 🚫 اجازه ندادن
     type: select
+    icon: https://www.svgrepo.com/show/444307/gui-ban.svg
     proxies:
       - REJECT
     hidden: true
-  - name: 🌐 همه سایتا
-    type: select
-    proxies:
-      - 🔀 نوع انتخاب پروکسی
-    hidden: true
+
 
 proxy-providers:
 
