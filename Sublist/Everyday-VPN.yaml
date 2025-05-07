@@ -158,7 +158,7 @@ rule-providers:
   censor:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/coldwater-10/clash_rules/main/censor.yaml
+    url: https://raw.githubusercontent.com/10ium/clash_rules/main/censor.yaml
     interval: 86400
     path: ./ruleset/tahrim.yaml
   local_ips:
@@ -182,19 +182,19 @@ rule-providers:
   iran:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/coldwater-10/clash_rules/main/iran.yaml
+    url: https://raw.githubusercontent.com/10ium/clash_rules/main/iran.yaml
     interval: 86400
     path: ./ruleset/iran.yaml
   steam:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/coldwater-10/clash_rules/main/steam.yaml
+    url: https://raw.githubusercontent.com/10ium/clash_rules/main/steam.yaml
     interval: 86400
     path: ./ruleset/steam.yaml
   game:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/coldwater-10/clash_rules/refs/heads/main/game.yaml
+    url: https://raw.githubusercontent.com/10ium/clash_rules/refs/heads/main/game.yaml
     interval: 86400
     path: ./ruleset/game.yaml
   category-games:
@@ -290,7 +290,7 @@ rule-providers:
   DownloadManagers:
     type: http
     behavior: classical
-    url: https://raw.githubusercontent.com/coldwater-10/clash_rules/refs/heads/main/DownloadManagers.yaml
+    url: https://raw.githubusercontent.com/10ium/clash_rules/refs/heads/main/DownloadManagers.yaml
     interval: 86400
     path: ./ruleset/DownloadManagers.yaml
   BanProgramAD:
@@ -387,13 +387,13 @@ rule-providers:
     type: http
     format: yaml
     behavior: domain
-    url: "https://raw.githubusercontent.com/coldwater-10/clash_rules/refs/heads/main/xiaomi_block_list.yaml"
+    url: "https://raw.githubusercontent.com/10ium/clash_rules/refs/heads/main/xiaomi_block_list.yaml"
     path: ./ruleset/xiaomi_block_list.yaml
     interval: 86400
   xiaomi_white_list:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/coldwater-10/clash_rules/refs/heads/main/xiaomi_white_list.yaml"
+    url: "https://raw.githubusercontent.com/10ium/clash_rules/refs/heads/main/xiaomi_white_list.yaml"
     path: ./ruleset/xiaomi_white_list.yaml
     interval: 86400
   cloudflare:
@@ -417,13 +417,13 @@ rule-providers:
   LiteAds:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/coldwater-10/clash_rules/refs/heads/main/LiteAds.yaml"
+    url: "https://raw.githubusercontent.com/10ium/clash_rules/refs/heads/main/LiteAds.yaml"
     path: ./ruleset/LiteAds.yaml
     interval: 86400
   discord:
     type: http
     behavior: classical
-    url: "https://raw.githubusercontent.com/coldwater-10/clash_rules/refs/heads/main/discord.yaml"
+    url: "https://raw.githubusercontent.com/10ium/clash_rules/refs/heads/main/discord.yaml"
     path: ./ruleset/discord.yaml
     interval: 86400
   instagram:
@@ -438,9 +438,15 @@ rule-providers:
     url: https://raw.githubusercontent.com/10ium/V2rayDomains2Clash/refs/heads/generated/category-ai-!cn.yaml
     interval: 86400
     path: ./ruleset/category-ai.yaml
+  stremio:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/10ium/clash_rules/refs/heads/main/stremio.yaml"
+    path: ./ruleset/stremio.yaml
+    interval: 86400
 
 proxy-groups:
-  - name: 🔀 نوع انتخاب پروکسی
+  - name: نوع انتخاب پروکسی 🔀
     icon: https://www.svgrepo.com/show/412721/choose.svg
     type: select
     proxies:
@@ -451,8 +457,8 @@ proxy-groups:
       - توزیع بار (پایدار) 🧲
       - توزیع بار (موقت) ⏳
       - توزیع بار (گردشی) 🔁
-      - ⛔ قطع اینترنت
-      - 🛡️ بدون فیلترشکن
+      - قطع اینترنت ⛔
+      - بدون فیلترشکن 🛡️
   - name: دستی 🤏🏻
     type: select
     icon: https://www.svgrepo.com/show/372331/cursor-hand-click.svg
@@ -528,228 +534,239 @@ proxy-groups:
     lazy: true
     use:
       - proxy
-  - name: 📥 دانلود منیجر
+  - name: دانلود منیجر 📥
     type: select
     icon: https://www.svgrepo.com/show/504072/advanced-download-manager.svg
     proxies:
-      - 🛡️ بدون فیلترشکن
-      - 🔀 نوع انتخاب پروکسی
+      - بدون فیلترشکن 🛡️
+      - نوع انتخاب پروکسی 🔀
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-      - 🚫 اجازه ندادن
-  - name: 💬 تلگرام
+      - اجازه ندادن 🚫
+  - name: تلگرام 💬
     type: select
     icon: https://www.svgrepo.com/show/354443/telegram.svg
     proxies:
-      - 🔀 نوع انتخاب پروکسی
-      - 🛡️ بدون فیلترشکن
+      - نوع انتخاب پروکسی 🔀
+      - بدون فیلترشکن 🛡️
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-      - 🚫 اجازه ندادن
-  - name: ▶️ یوتیوب
+      - اجازه ندادن 🚫
+  - name: یوتیوب ▶️
     type: select
     icon: https://www.svgrepo.com/show/475700/youtube-color.svg
     proxies:
-      - 🔀 نوع انتخاب پروکسی
-      - 🛡️ بدون فیلترشکن
+      - نوع انتخاب پروکسی 🔀
+      - بدون فیلترشکن 🛡️
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-      - 🚫 اجازه ندادن
-  - name: 🌍 گوگل
+      - اجازه ندادن 🚫
+  - name: گوگل 🌍
     type: select
     icon: https://www.svgrepo.com/show/475656/google-color.svg
     proxies:
-      - 🛡️ بدون فیلترشکن
-      - 🚫 اجازه ندادن
-      - 🔀 نوع انتخاب پروکسی
+      - بدون فیلترشکن 🛡️
+      - اجازه ندادن 🚫
+      - نوع انتخاب پروکسی 🔀
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-  - name: 🟢 واتس آپ
+  - name: واتس آپ 🟢
     type: select
     icon: https://www.svgrepo.com/show/452133/whatsapp.svg
     proxies:
-      - 🛡️ بدون فیلترشکن
-      - 🚫 اجازه ندادن
-      - 🔀 نوع انتخاب پروکسی
+      - بدون فیلترشکن 🛡️
+      - اجازه ندادن 🚫
+      - نوع انتخاب پروکسی 🔀
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-  - name: 🤖 هوش مصنوعی
+  - name: هوش مصنوعی 🤖
     type: select
     icon: https://www.svgrepo.com/show/306500/openai.svg
     proxies:
-      - 🔀 نوع انتخاب پروکسی
-      - 🛡️ بدون فیلترشکن
-      - 🚫 اجازه ندادن
+      - نوع انتخاب پروکسی 🔀
+      - بدون فیلترشکن 🛡️
+      - اجازه ندادن 🚫
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-  - name: 📸 اینستاگرام
+  - name: اینستاگرام 📸
     type: select
     icon: https://www.svgrepo.com/show/452229/instagram-1.svg
     proxies:
-      - 🔀 نوع انتخاب پروکسی
-      - 🛡️ بدون فیلترشکن
-      - 🚫 اجازه ندادن
+      - نوع انتخاب پروکسی 🔀
+      - بدون فیلترشکن 🛡️
+      - اجازه ندادن 🚫
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-  - name: 🆎 تبلیغات
+  - name: تبلیغات 🆎
     type: select
     icon: https://www.svgrepo.com/show/336358/ad.svg
     proxies:
-      - 🚫 اجازه ندادن
-      - 🛡️ بدون فیلترشکن
-      - 🔀 نوع انتخاب پروکسی
+      - اجازه ندادن 🚫
+      - بدون فیلترشکن 🛡️
+      - نوع انتخاب پروکسی 🔀
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-  - name: 🍃 تبلیغات اپ ها
+  - name: تبلیغات اپ ها 🍃
     type: select
     icon: https://www.svgrepo.com/show/12172/smartphone-ad.svg
     proxies:
-      - 🚫 اجازه ندادن
-      - 🛡️ بدون فیلترشکن
-      - 🔀 نوع انتخاب پروکسی
+      - اجازه ندادن 🚫
+      - بدون فیلترشکن 🛡️
+      - نوع انتخاب پروکسی 🔀
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-  - name: 🛑 رهگیری جهانی
+  - name: رهگیری جهانی 🛑
     type: select
     icon: https://www.svgrepo.com/show/298725/tracking-track.svg
     proxies:
-      - 🚫 اجازه ندادن
-      - 🛡️ بدون فیلترشکن
-      - 🔀 نوع انتخاب پروکسی
+      - اجازه ندادن 🚫
+      - بدون فیلترشکن 🛡️
+      - نوع انتخاب پروکسی 🔀
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-  - name: ⚠️ سایتای مخرب
+  - name: سایتای مخرب ⚠️
     type: select
     icon: https://www.svgrepo.com/show/381135/cyber-crime-cyber-phishing-fraud-hack-money.svg
     proxies:
-      - 🚫 اجازه ندادن
-      - 🔀 نوع انتخاب پروکسی
-      - 🛡️ بدون فیلترشکن
+      - اجازه ندادن 🚫
+      - نوع انتخاب پروکسی 🔀
+      - بدون فیلترشکن 🛡️
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-  - name: 🖥️ استیم
+  - name: استیم 🖥️
     type: select
     icon: https://www.svgrepo.com/show/452107/steam.svg
     proxies:
-      - 🛡️ بدون فیلترشکن
-      - 🚫 اجازه ندادن
-      - 🔀 نوع انتخاب پروکسی
+      - بدون فیلترشکن 🛡️
+      - اجازه ندادن 🚫
+      - نوع انتخاب پروکسی 🔀
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-  - name: 🎮 گیم
+  - name: گیم 🎮
     type: select
     icon: https://www.svgrepo.com/show/167729/game-controller.svg
     proxies:
-      - 🔀 نوع انتخاب پروکسی
-      - 🛡️ بدون فیلترشکن
-      - 🚫 اجازه ندادن
+      - نوع انتخاب پروکسی 🔀
+      - بدون فیلترشکن 🛡️
+      - اجازه ندادن 🚫
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-  - name: 📡 توییچ
+  - name: توییچ 📡
     type: select
     icon: https://www.svgrepo.com/show/343527/twitch-network-communication-interaction-connection.svg
     proxies:
-      - 🔀 نوع انتخاب پروکسی
-      - 🛡️ بدون فیلترشکن
-      - 🚫 اجازه ندادن
+      - نوع انتخاب پروکسی 🔀
+      - بدون فیلترشکن 🛡️
+      - اجازه ندادن 🚫
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-  - name: 🇮🇷 سایتای ایرانی
+  - name: سایتای ایرانی 🇮🇷
     type: select
     icon: https://upload.wikimedia.org/wikipedia/commons/3/36/Flag_of_Iran_%28civil%29.svg
     proxies:
-      - 🛡️ بدون فیلترشکن
-      - 🚫 اجازه ندادن
-      - 🔀 نوع انتخاب پروکسی
+      - بدون فیلترشکن 🛡️
+      - اجازه ندادن 🚫
+      - نوع انتخاب پروکسی 🔀
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-  - name: ☁️ کلودفلر
+  - name: کلودفلر ☁️
     type: select
     icon: https://www.svgrepo.com/show/353564/cloudflare.svg
     proxies:
-      - 🛡️ بدون فیلترشکن
-      - 🚫 اجازه ندادن
-      - 🔀 نوع انتخاب پروکسی
+      - بدون فیلترشکن 🛡️
+      - اجازه ندادن 🚫
+      - نوع انتخاب پروکسی 🔀
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-  - name: 🐙 گیتهاب
+  - name: گیتهاب 🐙
     type: select
     icon: https://www.svgrepo.com/show/355033/github.svg
     proxies:
-      - 🛡️ بدون فیلترشکن
-      - 🚫 اجازه ندادن
-      - 🔀 نوع انتخاب پروکسی
+      - بدون فیلترشکن 🛡️
+      - اجازه ندادن 🚫
+      - نوع انتخاب پروکسی 🔀
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-  - name: 🗣️ دیسکورد
+  - name: دیسکورد 🗣️
     type: select
     icon: https://www.svgrepo.com/show/343548/discord-communication-interaction-message-network.svg
     proxies:
-      - 🔀 نوع انتخاب پروکسی
-      - 🛡️ بدون فیلترشکن
-      - 🚫 اجازه ندادن
+      - نوع انتخاب پروکسی 🔀
+      - بدون فیلترشکن 🛡️
+      - اجازه ندادن 🚫
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-  - name: 🤬 سایتای سانسوری
+  - name: استریمیو 🎬
+    type: select
+    icon: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtNYCV3BWxgosM7nigmse8mvjE-KfW2e6KfkPknv1vPv4qjyjKvwKHqjSJ-032qUEP0U0&usqp=CAU
+    proxies:
+      - بدون فیلترشکن 🛡️
+      - نوع انتخاب پروکسی 🔀
+      - اجازه ندادن 🚫
+      - اتصال پایدار 🔗
+      - خودکار (بهترین پینگ) 🤖
+      - دستی 🤏🏻
+      - پشتیبان (در صورت قطعی) 🧯
+  - name: سایتای سانسوری 🤬
     type: select
     icon: https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Censorship.svg/300px-Censorship.svg.png
     proxies:
-      - 🚫 اجازه ندادن
-      - 🔀 نوع انتخاب پروکسی
-      - 🛡️ بدون فیلترشکن
+      - اجازه ندادن 🚫
+      - نوع انتخاب پروکسی 🔀
+      - بدون فیلترشکن 🛡️
       - اتصال پایدار 🔗
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
-  - name: 🛡️ بدون فیلترشکن
+  - name: بدون فیلترشکن 🛡️
     type: select
     icon: https://www.svgrepo.com/show/6318/connection.svg
     proxies:
       - DIRECT
     hidden: true
-  - name: ⛔ قطع اینترنت
+  - name: قطع اینترنت ⛔
     type: select
     icon: https://www.svgrepo.com/show/305372/wifi-off.svg
     proxies:
       - REJECT
     hidden: true
-  - name: 🚫 اجازه ندادن
+  - name: اجازه ندادن 🚫
     type: select
     icon: https://www.svgrepo.com/show/444307/gui-ban.svg
     proxies:
@@ -772,63 +789,64 @@ proxy-providers:
       url: "https://www.gstatic.com/generate_204"
 
 rules:
-  - RULE-SET,DownloadManagers,📥 دانلود منیجر
-  - RULE-SET,Download,📥 دانلود منیجر
-  - RULE-SET,BanProgramAD,🍃 تبلیغات اپ ها
-  - RULE-SET,BanAD,🛑 رهگیری جهانی
-  - RULE-SET,PrivateTracker,🛑 رهگیری جهانی
-  - RULE-SET,category_public_tracker,🛑 رهگیری جهانی
-  - RULE-SET,malware,⚠️ سایتای مخرب
-  - RULE-SET,phishing,⚠️ سایتای مخرب
-  - RULE-SET,cryptominers,⚠️ سایتای مخرب
-  - RULE-SET,warninglist,⚠️ سایتای مخرب
-  - RULE-SET,Ponzi,⚠️ سایتای مخرب
-  - RULE-SET,LiteAds,🆎 تبلیغات
-  - RULE-SET,iran_ads,🆎 تبلیغات
-  - RULE-SET,PersianBlocker,🆎 تبلیغات
-  - RULE-SET,ads,🆎 تبلیغات
-  - RULE-SET,BanEasyList,🆎 تبلیغات
-  - RULE-SET,twitch,📡 توییچ
-  - PROCESS-NAME,Telegram.exe,💬 تلگرام
-  - PROCESS-NAME,org.telegram.messenger,💬 تلگرام
-  - RULE-SET,telegram,💬 تلگرام
-  - RULE-SET,YouTube,▶️ یوتیوب
-  - RULE-SET,youtube,▶️ یوتیوب
-  - RULE-SET,YouTubeMusic,▶️ یوتیوب
-  - PROCESS-NAME,com.instagram.android,📸 اینستاگرام
-  - RULE-SET,instagram,📸 اینستاگرام
-  - DOMAIN-SUFFIX,deepseek.com,🤖 هوش مصنوعی
-  - DOMAIN-SUFFIX,qwen.ai,🤖 هوش مصنوعی
-  - RULE-SET,category-ai,🤖 هوش مصنوعی
-  - RULE-SET,censor,🤬 سایتای سانسوری
-  - RULE-SET,apps,🇮🇷 سایتای ایرانی
-  - RULE-SET,iran,🇮🇷 سایتای ایرانی
-  - RULE-SET,arvancloud,🇮🇷 سایتای ایرانی
-  - RULE-SET,derakcloud,🇮🇷 سایتای ایرانی
-  - RULE-SET,iranserver,🇮🇷 سایتای ایرانی
-  - RULE-SET,parspack,🇮🇷 سایتای ایرانی
-  - RULE-SET,irasn,🇮🇷 سایتای ایرانی
-  - RULE-SET,ircidr,🇮🇷 سایتای ایرانی
-  - RULE-SET,ir,🇮🇷 سایتای ایرانی
-  - RULE-SET,category_ir,🇮🇷 سایتای ایرانی
-  - RULE-SET,whatsapp,🟢 واتس آپ
-  - RULE-SET,steam,🖥️ استیم
-  - RULE-SET,SteamRegionCheck,🖥️ استیم
-  - RULE-SET,game,🎮 گیم
-  - RULE-SET,GameDownload,🎮 گیم
-  - RULE-SET,category-games,🎮 گیم
-  - RULE-SET,Xbox,🎮 گیم
-  - RULE-SET,discord,🗣️ دیسکورد
-  - RULE-SET,xiaomi_white_list,🔀 نوع انتخاب پروکسی
-  - RULE-SET,xiaomi-ads,🍃 تبلیغات اپ ها
-  - RULE-SET,xiaomi_block_list,🍃 تبلیغات اپ ها
-  - RULE-SET,cloudflare,☁️ کلودفلر
-  - RULE-SET,github,🐙 گیتهاب
-  - RULE-SET,google-play,🔀 نوع انتخاب پروکسی
-  - RULE-SET,google,🌍 گوگل
-  - RULE-SET,local_ips,🛡️ بدون فیلترشکن
-  - RULE-SET,private,🛡️ بدون فیلترشکن
-  - MATCH,🔀 نوع انتخاب پروکسی
+  - RULE-SET,DownloadManagers,دانلود منیجر 📥
+  - RULE-SET,Download,دانلود منیجر 📥
+  - RULE-SET,stremio,استریمیو 🎬
+  - RULE-SET,BanProgramAD,تبلیغات اپ ها 🍃
+  - RULE-SET,BanAD,رهگیری جهانی 🛑
+  - RULE-SET,PrivateTracker,رهگیری جهانی 🛑
+  - RULE-SET,category_public_tracker,رهگیری جهانی 🛑
+  - RULE-SET,malware,سایتای مخرب ⚠️
+  - RULE-SET,phishing,سایتای مخرب ⚠️
+  - RULE-SET,cryptominers,سایتای مخرب ⚠️
+  - RULE-SET,warninglist,سایتای مخرب ⚠️
+  - RULE-SET,Ponzi,سایتای مخرب ⚠️
+  - RULE-SET,LiteAds,تبلیغات 🆎
+  - RULE-SET,iran_ads,تبلیغات 🆎
+  - RULE-SET,PersianBlocker,تبلیغات 🆎
+  - RULE-SET,ads,تبلیغات 🆎
+  - RULE-SET,BanEasyList,تبلیغات 🆎
+  - RULE-SET,twitch,توییچ 📡
+  - PROCESS-NAME,Telegram.exe,تلگرام 💬
+  - PROCESS-NAME,org.telegram.messenger,تلگرام 💬
+  - RULE-SET,telegram,تلگرام 💬
+  - RULE-SET,YouTube,یوتیوب ▶️
+  - RULE-SET,youtube,یوتیوب ▶️
+  - RULE-SET,YouTubeMusic,یوتیوب ▶️
+  - PROCESS-NAME,com.instagram.android,اینستاگرام 📸
+  - RULE-SET,instagram,اینستاگرام 📸
+  - DOMAIN-SUFFIX,deepseek.com,هوش مصنوعی 🤖
+  - DOMAIN-SUFFIX,qwen.ai,هوش مصنوعی 🤖
+  - RULE-SET,category-ai,هوش مصنوعی 🤖
+  - RULE-SET,censor,سایتای سانسوری 🤬
+  - RULE-SET,apps,سایتای ایرانی 🇮🇷
+  - RULE-SET,iran,سایتای ایرانی 🇮🇷
+  - RULE-SET,arvancloud,سایتای ایرانی 🇮🇷
+  - RULE-SET,derakcloud,سایتای ایرانی 🇮🇷
+  - RULE-SET,iranserver,سایتای ایرانی 🇮🇷
+  - RULE-SET,parspack,سایتای ایرانی 🇮🇷
+  - RULE-SET,irasn,سایتای ایرانی 🇮🇷
+  - RULE-SET,ircidr,سایتای ایرانی 🇮🇷
+  - RULE-SET,ir,سایتای ایرانی 🇮🇷
+  - RULE-SET,category_ir,سایتای ایرانی 🇮🇷
+  - RULE-SET,whatsapp,واتس آپ 🟢
+  - RULE-SET,steam,استیم 🖥️
+  - RULE-SET,SteamRegionCheck,استیم 🖥️
+  - RULE-SET,game,گیم 🎮
+  - RULE-SET,GameDownload,گیم 🎮
+  - RULE-SET,category-games,گیم 🎮
+  - RULE-SET,Xbox,گیم 🎮
+  - RULE-SET,discord,دیسکورد 🗣️
+  - RULE-SET,xiaomi_white_list,نوع انتخاب پروکسی 🔀
+  - RULE-SET,xiaomi-ads,تبلیغات اپ ها 🍃
+  - RULE-SET,xiaomi_block_list,تبلیغات اپ ها 🍃
+  - RULE-SET,cloudflare,کلودفلر ☁️
+  - RULE-SET,github,گیتهاب 🐙
+  - RULE-SET,google-play,نوع انتخاب پروکسی 🔀
+  - RULE-SET,google,گوگل 🌍
+  - RULE-SET,local_ips,بدون فیلترشکن 🛡️
+  - RULE-SET,private,بدون فیلترشکن 🛡️
+  - MATCH,نوع انتخاب پروکسی 🔀
 
 ntp:
   enable: true
