@@ -444,6 +444,12 @@ rule-providers:
     url: "https://raw.githubusercontent.com/10ium/clash_rules/refs/heads/main/stremio.yaml"
     path: ./ruleset/stremio.yaml
     interval: 86400
+  windows:
+    type: http
+    behavior: classical
+    url: "https://raw.githubusercontent.com/10ium/clash_rules/refs/heads/main/windows.yaml"
+    path: ./ruleset/windows.yaml
+    interval: 86400
 
 proxy-groups:
   - name: نوع انتخاب پروکسی 🔀
@@ -536,7 +542,7 @@ proxy-groups:
       - proxy
   - name: دانلود منیجر 📥
     type: select
-    icon: https://www.svgrepo.com/show/504072/advanced-download-manager.svg
+    icon: https://www.sadeemrdp.com/fonts/apps/IDM-Logo.svg
     proxies:
       - بدون فیلترشکن 🛡️
       - نوع انتخاب پروکسی 🔀
@@ -580,7 +586,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: واتس آپ 🟢
     type: select
-    icon: https://www.svgrepo.com/show/452133/whatsapp.svg
+    icon: https://upload.wikimedia.org/wikipedia/commons/4/4c/WhatsApp_Logo_green.svg
     proxies:
       - بدون فیلترشکن 🛡️
       - اجازه ندادن 🚫
@@ -699,9 +705,20 @@ proxy-groups:
       - خودکار (بهترین پینگ) 🤖
       - دستی 🤏🏻
       - پشتیبان (در صورت قطعی) 🧯
+  - name: ویندوز 🧊
+    type: select
+    icon: https://icon.icepanel.io/Technology/svg/Windows-11.svg
+    proxies:
+      - بدون فیلترشکن 🛡️
+      - اجازه ندادن 🚫
+      - نوع انتخاب پروکسی 🔀
+      - اتصال پایدار 🔗
+      - خودکار (بهترین پینگ) 🤖
+      - دستی 🤏🏻
+      - پشتیبان (در صورت قطعی) 🧯
   - name: کلودفلر ☁️
     type: select
-    icon: https://www.svgrepo.com/show/353564/cloudflare.svg
+    icon: https://icon.icepanel.io/Technology/svg/Cloudflare.svg
     proxies:
       - بدون فیلترشکن 🛡️
       - اجازه ندادن 🚫
@@ -723,7 +740,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: دیسکورد 🗣️
     type: select
-    icon: https://www.svgrepo.com/show/343548/discord-communication-interaction-message-network.svg
+    icon: https://automatorplugin.com/wp-content/uploads/2024/10/discord-icon.svg
     proxies:
       - نوع انتخاب پروکسی 🔀
       - بدون فیلترشکن 🛡️
@@ -734,7 +751,7 @@ proxy-groups:
       - پشتیبان (در صورت قطعی) 🧯
   - name: استریمیو 🎬
     type: select
-    icon: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtNYCV3BWxgosM7nigmse8mvjE-KfW2e6KfkPknv1vPv4qjyjKvwKHqjSJ-032qUEP0U0&usqp=CAU
+    icon: https://stremio.github.io/stremio-addon-guide/img/stremio.svg
     proxies:
       - بدون فیلترشکن 🛡️
       - نوع انتخاب پروکسی 🔀
@@ -840,6 +857,7 @@ rules:
   - RULE-SET,xiaomi_white_list,نوع انتخاب پروکسی 🔀
   - RULE-SET,xiaomi-ads,تبلیغات اپ ها 🍃
   - RULE-SET,xiaomi_block_list,تبلیغات اپ ها 🍃
+  - RULE-SET,windows,ویندوز 🧊
   - RULE-SET,cloudflare,کلودفلر ☁️
   - RULE-SET,github,گیتهاب 🐙
   - RULE-SET,google-play,نوع انتخاب پروکسی 🔀
