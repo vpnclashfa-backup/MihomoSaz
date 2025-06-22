@@ -17,7 +17,7 @@ class ConfigProcessor:
         self.template_path = "mihomo_template.txt"
         self.output_dir = "Sublist"
         self.readme_path = "README.md"
-        self.base_url = "https://raw.githubusercontent.com/10ium/MihomoSaz/main/Sublist/"
+        self.base_url = "https://raw.githubusercontent.com/vpnclashfa-backup/MihomoSaz/main/Sublist/"
         self.simple_list = "Simple_URL_List.txt"
         self.complex_list = "Complex_URL_list.txt"
 
@@ -67,7 +67,7 @@ class ConfigProcessor:
             "### با قوانین مخصوص ایران\n",
             "**فایل‌های پیکربندی آماده استفاده:**\n"
         ]
-        
+
         emojis = ["🌐", "🚀", "🔒", "⚡", "🛡️"]
         for idx, (filename, _) in enumerate(entries):
             emoji = emojis[idx % len(emojis)]
@@ -79,16 +79,16 @@ class ConfigProcessor:
             "1. روی لینک مورد نظر **کلیک راست** کنید",
             "2. گزینه **«کپی لینک»** را انتخاب کنید",
             "3. لینک را در کلش متا **وارد کنید**\n",
-    
+
             "## ⭐ ویژگی‌ها",
             "- 🚀 بهینه‌شده برای ایران",
             "- 🔄 فعال و غیر فعال کردن راحت قوانین",
             "- 📆 آپدیت روزانه\n",
-    
+
             "## 📥 دریافت کلاینت",
             "### ویندوز",  
             "[Clash Verge Rev](https://github.com/clash-verge-rev/clash-verge-rev/releases)",
-    
+
             "### اندروید",
             "[ClashMeta for Android](https://github.com/MetaCubeX/ClashMetaForAndroid/releases)"
         ])
@@ -101,7 +101,7 @@ class ConfigProcessor:
         # بارگذاری لیست‌ها
         simple_entries = self._load_entries(self.simple_list, False)
         complex_entries = self._load_entries(self.complex_list, True)
-        
+
         # ادغام با اولویت ساده
         merged = {}
         for name, url in simple_entries + complex_entries:
@@ -118,7 +118,7 @@ class ConfigProcessor:
         for filename, url in merged.items():
             modified = self._replace_proxy_url(original_template, url)
             output_path = os.path.join(self.output_dir, filename)
-            
+
             # اطمینان از وجود دایرکتوری‌های میانی مسیر خروجی
             dir_path = os.path.dirname(output_path)
             if dir_path:
